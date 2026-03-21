@@ -943,6 +943,38 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: none; }
 .contact-success.show { display:flex; }
 .contact-form-wrap.hide { display:none; }
 
+
+/* ---- OVERLAY FIX ---- */
+#modalOverlay, #contactOverlay {
+  display: none;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 9000 !important;
+  background: rgba(8,11,20,.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+#modalOverlay.open, #contactOverlay.open {
+  display: flex !important;
+}
+#contactOverlay { z-index: 9100 !important; }
+.modal, #contactModal {
+  background: var(--night2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+  animation: min .3s cubic-bezier(.16,1,.3,1);
+}
+
 </style>
 </head>
 <body>
@@ -1271,7 +1303,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: none; }
   <div class="contacts">
     <div class="contact-item">
       <div class="contact-label">Email</div>
-      helppositionkey@proton.me
+      <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="157d707965657a667c617c7a7b7e706c5565677a617a7b3b7870">[email&#160;protected]</a>
     </div>
     <div class="contact-item">
       <div class="contact-label">Telegram</div>
@@ -1293,13 +1325,13 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: none; }
   <div class="footer-motto">"Integrity · Precision · Fidelity" — v3.5.0 &amp; Plus v1.0</div>
 </footer>
 <!-- MODAL RICHIEDI ACCESSO -->
-<div id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+<div id="modalOverlay" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal">
     <div class="modal-success" id="modalSuccess">
       <div class="success-icon">&#10003;</div>
       <div class="success-title">Richiesta Inviata!</div>
       <p class="success-text">La tua richiesta &egrave; stata inviata a<br>
-        <span class="success-email">helppositionkey@proton.me</span><br><br>
+        <span class="success-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1d7578716d6d726e74697472737678645d6d6f72697273337078">[email&#160;protected]</a></span><br><br>
         Riceverai la tua License Key entro 24 ore.
       </p>
       <button type="button" class="btn-outline" id="btnCloseModalSuccess"
@@ -1390,7 +1422,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: none; }
           <div class="spinner"></div>
         </button>
         <div class="modal-disclaimer">
-          Inviando il modulo accetti di essere contattato a helppositionkey@proton.me
+          Inviando il modulo accetti di essere contattato a <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cea6aba2bebea1bda7baa7a1a0a5abb78ebebca1baa1a0e0a3ab">[email&#160;protected]</a>
         </div>
       </div>
     </div>
@@ -1403,7 +1435,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: none; }
       <div class="success-icon">&#10003;</div>
       <div class="success-title">Messaggio Inviato!</div>
       <p class="success-text">Il tuo messaggio &egrave; stato inviato a<br>
-        <span class="success-email">helppositionkey@proton.me</span><br><br>
+        <span class="success-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="620a070e12120d110b160b0d0c09071b2212100d160d0c4c0f07">[email&#160;protected]</a></span><br><br>
         Ti risponderemo il prima possibile.
       </p>
       <button type="button" class="btn-outline" id="btnCloseContactSuccess"
@@ -1438,20 +1470,4 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: none; }
         <div class="form-field">
           <label class="form-label" for="cMessaggio">Messaggio <span>*</span></label>
           <textarea class="form-textarea" id="cMessaggio" placeholder="Scrivi qui il tuo messaggio..."></textarea>
-          <div class="form-error" id="ecMessaggio">Inserisci il tuo messaggio</div>
-        </div>
-      </form>
-      <div class="modal-footer">
-        <button type="button" class="btn-submit" id="btnSubmitContact">
-          <span class="btn-text">Invia Messaggio</span>
-          <div class="spinner"></div>
-        </button>
-        <div class="modal-disclaimer">
-          Inviando il modulo accetti di essere contattato a helppositionkey@proton.me
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<script src="script.js"></script>
-</html>
+          <div class="form-error" id="e
