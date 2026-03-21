@@ -963,7 +963,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: none; }
     <a href="#emotivity" style="">Emotivity</a>
     <a href="#versions" style="color: var(--gold2);">Versioni</a>
     <a href="#setup" style="">Configurazione</a>
-    <a href="#" class="nav-cta" onclick="openContactModal();return false;">Contattaci</a>
+    <a href="#" class="nav-cta" id="btnContattaci">Contattaci</a>
   </div>
 </nav>
 
@@ -981,7 +981,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: none; }
       controllo del rischio, disciplina meccanica, esecuzione professionale.
     </p>
     <div class="hero-cta-group">
-      <a href="#" class="btn-primary" onclick="openModal();return false;">Richiedi Accesso</a>
+      <a href="#" class="btn-primary" id="btnRichiediAccesso">Richiedi Accesso</a>
       <a href="#features" class="btn-outline">Scopri di più</a>
     </div>
   </div>
@@ -1277,13 +1277,13 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: none; }
   <h2 class="cta-title">NON LASCIARE IL<br>TUO FUTURO AL CASO</h2>
   <p class="cta-sub">Smetti di sperare nella disciplina. Rendila automatica. Un chirurgo non opera con un coltello da cucina.</p>
   <div class="hero-cta-group" style="justify-content:center;">
-    <a href="#" class="btn-primary" onclick="openModal();return false;">Richiedi la tua Licenza</a>
+    <a href="#" class="btn-primary" id="btnRichiediLicenza">Richiedi la tua Licenza</a>
     <a href="https://www.youtube.com/@PositionKey" target="_blank" class="btn-outline">▶ YouTube Channel</a>
   </div>
   <div class="contacts">
     <div class="contact-item">
       <div class="contact-label">Email</div>
-      helppositionkey@proton.me
+      <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="167e737a666679657f627f79787d736f56666479627978387b73">[email&#160;protected]</a>
     </div>
     <div class="contact-item">
       <div class="contact-label">Telegram</div>
@@ -1313,10 +1313,10 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: none; }
       <div class="success-icon">&#10003;</div>
       <div class="success-title">Messaggio Inviato!</div>
       <p class="success-text">Il tuo messaggio &egrave; stato inviato a<br>
-        <span class="success-email">helppositionkey@proton.me</span><br><br>
+        <span class="success-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="99f1fcf5e9e9f6eaf0edf0f6f7f2fce0d9e9ebf6edf6f7b7f4fc">[email&#160;protected]</a></span><br><br>
         Ti risponderemo il prima possibile.
       </p>
-      <button type="button" class="btn-outline" onclick="closeContactModal()"
+      <button type="button" class="btn-outline" id="btnCloseContact"
         style="margin-top:8px;min-width:160px;display:flex;align-items:center;justify-content:center;">
         Chiudi
       </button>
@@ -1328,7 +1328,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: none; }
           <div class="modal-title" id="contactTitle">Contattaci</div>
           <div class="modal-sub">Scrivici &mdash; ti risponderemo al pi&ugrave; presto</div>
         </div>
-        <button type="button" class="modal-close" onclick="closeContactModal()" aria-label="Chiudi">&#10005;</button>
+        <button type="button" class="modal-close" id="btnCloseContact" aria-label="Chiudi">&#10005;</button>
       </div>
       <form class="contact-form-body" id="contactForm" novalidate>
         <div class="form-row">
@@ -1357,19 +1357,19 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: none; }
         </div>
       </form>
       <div class="modal-footer">
-        <button type="button" class="btn-submit" id="btnContact" onclick="submitContact()">
+        <button type="button" class="btn-submit" id="btnContact" id="btnSubmitContact">
           <span class="btn-text">Invia Messaggio</span>
           <div class="spinner"></div>
         </button>
         <div class="modal-disclaimer">
-          Inviando il modulo accetti di essere contattato a helppositionkey@proton.me
+          Inviando il modulo accetti di essere contattato a <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4f272a233f3f203c263b262021242a360f3f3d203b202161222a">[email&#160;protected]</a>
         </div>
       </div>
     </div>
 
   </div>
 </div>
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ================================================
    POSITION KEY — All JavaScript
 ================================================ */
@@ -1574,6 +1574,8 @@ window.closeModal=function(){
 (function(){
   var ov=document.getElementById('modalOverlay');
   if(ov)ov.addEventListener('click',function(e){if(e.target===this)closeModal();});
+  var bsm=document.getElementById('btnSubmitForm');if(bsm)bsm.addEventListener('click',function(){submitForm();});
+  var bcm=document.getElementById('btnCloseModal');if(bcm)bcm.addEventListener('click',function(){closeModal();});
   document.querySelectorAll('.pricing-card').forEach(function(card){
     card.addEventListener('click',function(){
       document.querySelectorAll('.pricing-card').forEach(function(c){c.classList.remove('selected');});
@@ -1581,10 +1583,14 @@ window.closeModal=function(){
       var ep=document.getElementById('ePag');if(ep)ep.classList.remove('show');
     });
   });
-  document.querySelectorAll('a.btn-primary,button.btn-primary').forEach(function(btn){
-    if(btn.textContent.trim().indexOf('Richiedi')!==-1)
-      btn.addEventListener('click',function(e){e.preventDefault();openModal();});
+  // Bottoni Richiedi Accesso — collegamento diretto per ID
+  ['btnRichiediAccesso','btnRichiediLicenza'].forEach(function(id){
+    var el=document.getElementById(id);
+    if(el) el.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();openModal();});
   });
+  // Bottone Contattaci
+  var btnC=document.getElementById('btnContattaci');
+  if(btnC) btnC.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();openContactModal();});
 })();
 function vf(id,eid){var el=document.getElementById(id),er=document.getElementById(eid);if(!el||!er)return true;if(!el.value.trim()){el.classList.add('error');er.classList.add('show');return false;}el.classList.remove('error');er.classList.remove('show');return true;}
 ['fNome','fCognome','fAcc'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('blur',function(){vf(id,'e'+id.slice(1));});});
@@ -1629,7 +1635,11 @@ window.closeContactModal=function(){
   if(fw)fw.classList.remove('hide');if(cs)cs.classList.remove('show');
   var btn=document.getElementById('btnContact');if(btn){btn.classList.remove('loading');btn.disabled=false;}
 };
-(function(){var cov=document.getElementById('contactOverlay');if(cov)cov.addEventListener('click',function(e){if(e.target===this)closeContactModal();});})();
+(function(){
+  var cov=document.getElementById('contactOverlay');if(cov)cov.addEventListener('click',function(e){if(e.target===this)closeContactModal();});
+  var bcc=document.getElementById('btnCloseContact');if(bcc)bcc.addEventListener('click',function(){closeContactModal();});
+  var bsc=document.getElementById('btnSubmitContact');if(bsc)bsc.addEventListener('click',function(){submitContact();});
+})();
 function vcf(id,eid){var el=document.getElementById(id),er=document.getElementById(eid);if(!el||!er)return true;if(!el.value.trim()){el.classList.add('error');er.classList.add('show');return false;}el.classList.remove('error');er.classList.remove('show');return true;}
 function vcfEmail(id,eid){var el=document.getElementById(id),er=document.getElementById(eid);if(!el||!er)return true;var v=el.value.trim();var ok=v.length>0&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);if(!ok){el.classList.add('error');er.classList.add('show');return false;}el.classList.remove('error');er.classList.remove('show');return true;}
 (function(){
@@ -1645,10 +1655,4 @@ window.submitContact=function(){
   var email=document.getElementById('cEmail').value.trim();
   var msg=document.getElementById('cMessaggio').value.trim();
   var sub=encodeURIComponent('Messaggio da '+nome+' '+cognome+' - Position Key');
-  var body=encodeURIComponent('Mittente: '+nome+' '+cognome+'\nEmail:    '+email+'\n===============================\n\n'+msg+'\n\n===============================\nInviato tramite il sito ufficiale Position Key');
-  var btn=document.getElementById('btnContact');if(btn){btn.classList.add('loading');btn.disabled=true;}
-  window.location.href='mailto:helppositionkey@proton.me?subject='+sub+'&body='+body;
-  setTimeout(function(){var fw=document.getElementById('contactFormWrap'),cs=document.getElementById('contactSuccess');if(fw)fw.classList.add('hide');if(cs)cs.classList.add('show');if(btn){btn.classList.remove('loading');btn.disabled=false;}},900);
-};
-</script>
-</html>
+  var body=encodeURIComponent('Mittente: '+nome+' '+cognome+'\nEmail:    '+email+'\n===============================\n\n'+msg+'\n\n===============================\nInviato tramite il 
