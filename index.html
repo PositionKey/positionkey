@@ -1483,5 +1483,133 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: none; }
         </div>
         <div class="form-field">
           <label class="form-label" for="cMessaggio">Messaggio <span>*</span></label>
-          <textarea class="form-textarea" id="cMessaggio" placeholder="Scrivi qui il tuo messaggio..."></textarea>
-          <div class="form-error" id="e
+          <textarea class="form-textarea" id="cMessaggio" placeholder="Scrivi qui il tuo messaggio...">
+          <div class="form-error" id="ecMessaggio">Inserisci il tuo messaggio</div>
+        </div>
+      </form>
+      <div class="modal-footer">
+        <button type="button" class="btn-submit" id="btnSubmitContact">
+          <span class="btn-text">Invia Messaggio</span>
+          <div class="spinner"></div>
+        </button>
+        <div class="modal-disclaimer">
+          Inviando il modulo accetti di essere contattato a helppositionkey@proton.me
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+/* Modal critico - eseguito dopo il DOM */
+function openModal() {
+  var o = document.getElementById('modalOverlay');
+  if (o) { o.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+  setTimeout(function(){ var f=document.getElementById('fNome'); if(f)f.focus(); }, 150);
+}
+function closeModal() {
+  var o = document.getElementById('modalOverlay');
+  if (o) { o.style.display = 'none'; document.body.style.overflow = ''; }
+  var form = document.getElementById('accessForm');
+  if (form) form.reset();
+  document.querySelectorAll('#accessForm .form-input, #accessForm .form-select').forEach(function(el){ el.classList.remove('error'); });
+  document.querySelectorAll('#accessForm .form-error').forEach(function(el){ el.classList.remove('show'); });
+  document.querySelectorAll('.pricing-card').forEach(function(c){ c.classList.remove('selected'); });
+  var fc = document.getElementById('modalFormContent'), ms = document.getElementById('modalSuccess');
+  if (fc) fc.classList.remove('hide'); if (ms) ms.classList.remove('show');
+}
+function openContactModal() {
+  var o = document.getElementById('contactOverlay');
+  if (o) { o.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+  setTimeout(function(){ var f=document.getElementById('cNome'); if(f)f.focus(); }, 150);
+}
+function closeContactModal() {
+  var o = document.getElementById('contactOverlay');
+  if (o) { o.style.display = 'none'; document.body.style.overflow = ''; }
+  var form = document.getElementById('contactForm');
+  if (form) form.reset();
+  document.querySelectorAll('#contactForm .form-input, #contactForm .form-textarea').forEach(function(el){ el.classList.remove('error'); });
+  document.querySelectorAll('#contactForm .form-error').forEach(function(el){ el.classList.remove('show'); });
+  var fw = document.getElementById('contactFormWrap'), cs = document.getElementById('contactSuccess');
+  if (fw) fw.classList.remove('hide'); if (cs) cs.classList.remove('show');
+}
+function submitForm() {
+  var ok = true;
+  function vf(id,eid){var el=document.getElementById(id),er=document.getElementById(eid);if(!el||!er)return true;if(!el.value.trim()){el.classList.add('error');er.classList.add('show');return false;}el.classList.remove('error');er.classList.remove('show');return true;}
+  ok=vf('fNome','eNome')&&ok; ok=vf('fCognome','eCognome')&&ok; ok=vf('fAcc','eAcc')&&ok;
+  var pt=document.getElementById('fPiat');
+  if(pt&&!pt.value){pt.classList.add('error');document.getElementById('ePiat').classList.add('show');ok=false;}
+  else if(pt){pt.classList.remove('error');document.getElementById('ePiat').classList.remove('show');}
+  var vr=document.getElementById('fVer');
+  if(vr&&!vr.value){vr.classList.add('error');document.getElementById('eVer').classList.add('show');ok=false;}
+  else if(vr){vr.classList.remove('error');document.getElementById('eVer').classList.remove('show');}
+  var pg=document.querySelector('input[name="pagamento"]:checked');
+  if(!pg){document.getElementById('ePag').classList.add('show');ok=false;}
+  if(!ok){var fe=document.querySelector('.form-input.error,.form-select.error');if(fe)fe.scrollIntoView({behavior:'smooth',block:'center'});return;}
+  var nome=document.getElementById('fNome').value.trim();
+  var cog=document.getElementById('fCognome').value.trim();
+  var piat=pt.value, ver=vr.value, acc=document.getElementById('fAcc').value.trim();
+  var paga=pg.value, isU=pg.id==='payUsdt';
+  var noteU=isU?'\nNOTE USDT: inserire numero account nelle note: '+acc:'';
+  var sub=encodeURIComponent('Richiesta Licenza Position Key - '+nome+' '+cog);
+  var body=encodeURIComponent('Richiesta Licenza Position Key\n==============================\nNome: '+nome+'\nCognome: '+cog+'\nPiattaforma: '+piat+'\nVersione: '+ver+'\nAccount: '+acc+'\nPagamento: '+paga+noteU+'\n==============================\nInviato dal sito Position Key');
+  window.location.href='mailto:helppositionkey@proton.me?subject='+sub+'&body='+body;
+  setTimeout(function(){var fc=document.getElementById('modalFormContent'),ms=document.getElementById('modalSuccess');if(fc)fc.classList.add('hide');if(ms)ms.classList.add('show');},900);
+}
+function submitContact() {
+  function vcf(id,eid){var el=document.getElementById(id),er=document.getElementById(eid);if(!el||!er)return true;if(!el.value.trim()){el.classList.add('error');er.classList.add('show');return false;}el.classList.remove('error');er.classList.remove('show');return true;}
+  function vcfEmail(id,eid){var el=document.getElementById(id),er=document.getElementById(eid);if(!el||!er)return true;var v=el.value.trim(),ok=v.length>0&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);if(!ok){el.classList.add('error');er.classList.add('show');return false;}el.classList.remove('error');er.classList.remove('show');return true;}
+  var ok=true;
+  ok=vcf('cNome','ecNome')&&ok; ok=vcf('cCognome','ecCognome')&&ok;
+  ok=vcfEmail('cEmail','ecEmail')&&ok; ok=vcf('cMessaggio','ecMessaggio')&&ok;
+  if(!ok){var fe=document.querySelector('#contactForm .form-input.error,#contactForm .form-textarea.error');if(fe)fe.scrollIntoView({behavior:'smooth',block:'center'});return;}
+  var nome=document.getElementById('cNome').value.trim();
+  var cognome=document.getElementById('cCognome').value.trim();
+  var email=document.getElementById('cEmail').value.trim();
+  var msg=document.getElementById('cMessaggio').value.trim();
+  var sub=encodeURIComponent('Messaggio da '+nome+' '+cognome+' - Position Key');
+  var body=encodeURIComponent('Mittente: '+nome+' '+cognome+'\nEmail: '+email+'\n==============================\n\n'+msg+'\n\n==============================\nInviato dal sito Position Key');
+  window.location.href='mailto:helppositionkey@proton.me?subject='+sub+'&body='+body;
+  setTimeout(function(){var fw=document.getElementById('contactFormWrap'),cs=document.getElementById('contactSuccess');if(fw)fw.classList.add('hide');if(cs)cs.classList.add('show');},900);
+}
+
+/* Collega i bottoni - DOM già pronto perché lo script è in fondo al body */
+(function(){
+  // Overlay click per chiudere
+  document.getElementById('modalOverlay').addEventListener('click', function(e){ if(e.target===this) closeModal(); });
+  document.getElementById('contactOverlay').addEventListener('click', function(e){ if(e.target===this) closeContactModal(); });
+
+  // Pricing cards
+  document.querySelectorAll('.pricing-card').forEach(function(card){
+    card.addEventListener('click', function(){
+      document.querySelectorAll('.pricing-card').forEach(function(c){ c.classList.remove('selected'); });
+      card.classList.add('selected');
+      var r = card.querySelector('input[type="radio"]'); if(r) r.checked = true;
+      var ep = document.getElementById('ePag'); if(ep) ep.classList.remove('show');
+    });
+  });
+
+  // Bottoni principali
+  var btns = {
+    'btnRichiediAccesso': openModal,
+    'btnRichiediLicenza': openModal,
+    'btnContattaci':      openContactModal,
+    'btnCloseModal':      closeModal,
+    'btnCloseModalSuccess': closeModal,
+    'btnCloseContact':    closeContactModal,
+    'btnCloseContactSuccess': closeContactModal,
+    'btnSubmitForm':      submitForm,
+    'btnSubmitContact':   submitContact
+  };
+  Object.keys(btns).forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.addEventListener('click', function(e){ e.preventDefault(); btns[id](); });
+  });
+
+  // ESC
+  document.addEventListener('keydown', function(e){
+    if(e.key==='Escape'){ closeModal(); closeContactModal(); }
+  });
+})();
+</script>
+</body>
+</html>
