@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contattaci — Position Key</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --night:#080B14; --night2:#0D1120; --night3:#131929;
+  --violet:#7C3AED; --violet2:#9F67FF; --violet3:#C4A0FF;
+  --gold:#C8922A; --gold2:#E6B84A;
+  --off-white:#E8E6F0; --muted:#8B8FA8;
+  --border:rgba(124,58,237,.18);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'DM Sans',system-ui,sans-serif;
+  background:var(--night); color:var(--off-white);
+  min-height:100vh; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; padding:24px 16px;
+}
+.page-header{
+  width:100%; max-width:520px;
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:28px;
+}
+.back-link{
+  font-family:'Space Mono',monospace; font-size:11px;
+  letter-spacing:1.5px; text-transform:uppercase;
+  color:var(--muted); text-decoration:none;
+  display:flex; align-items:center; gap:8px; transition:color .2s;
+}
+.back-link:hover{color:var(--gold2);}
+.brand{font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:2px; color:var(--off-white);}
+.brand span{color:var(--gold2);}
+.card{
+  width:100%; max-width:520px;
+  background:var(--night2); border:1px solid var(--border);
+  border-radius:8px; overflow:hidden;
+}
+.card-header{
+  padding:28px 32px 24px; border-bottom:1px solid var(--border);
+  background:linear-gradient(135deg,#1a0d2e,#2d1b4e);
+}
+.card-title{font-family:'Bebas Neue',sans-serif; font-size:32px; letter-spacing:1px; color:var(--off-white);}
+.card-sub{font-family:'Space Mono',monospace; font-size:11px; color:var(--violet3); letter-spacing:.5px; margin-top:6px;}
+.card-body{padding:28px 32px; display:flex; flex-direction:column; gap:20px;}
+.form-row{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+@media(max-width:480px){.form-row{grid-template-columns:1fr;}}
+.form-field{display:flex; flex-direction:column; gap:6px;}
+.form-label{font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--muted);}
+.form-label span{color:var(--violet3); margin-left:2px;}
+.form-input,.form-textarea{
+  background:var(--night3); border:1px solid rgba(124,58,237,.25);
+  border-radius:4px; padding:13px 16px;
+  font-family:'DM Sans',sans-serif; font-size:15px;
+  color:var(--off-white); width:100%;
+  transition:border-color .2s, box-shadow .2s;
+  -webkit-appearance:none; min-height:50px;
+}
+.form-input::placeholder,.form-textarea::placeholder{color:rgba(139,143,168,.45);}
+.form-input:focus,.form-textarea:focus{
+  outline:none; border-color:var(--violet2);
+  box-shadow:0 0 0 3px rgba(124,58,237,.15);
+}
+.form-input.error,.form-textarea.error{border-color:#F87171;}
+.form-textarea{min-height:140px; resize:vertical; line-height:1.6;}
+.form-error{font-size:11px; color:#F87171; display:none; margin-top:2px;}
+.form-error.show{display:block;}
+.btn-submit{
+  font-family:'Space Mono',monospace; font-size:12px;
+  letter-spacing:2px; text-transform:uppercase;
+  background:linear-gradient(135deg,var(--violet),var(--violet2));
+  color:white; border:none; border-radius:4px;
+  padding:16px 24px; cursor:pointer; width:100%; min-height:54px;
+  transition:all .25s; box-shadow:0 4px 20px rgba(124,58,237,.35);
+  display:flex; align-items:center; justify-content:center; gap:10px;
+}
+.btn-submit:hover{box-shadow:0 6px 28px rgba(124,58,237,.55); transform:translateY(-1px);}
+.btn-submit:active{transform:scale(.98);}
+.spinner{width:18px; height:18px; border:2px solid rgba(255,255,255,.3); border-top-color:white; border-radius:50%; animation:spin .8s linear infinite; display:none;}
+.btn-submit.loading .spinner{display:block;}
+.btn-submit.loading .btn-text{display:none;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.disclaimer{font-family:'Space Mono',monospace; font-size:9px; color:var(--muted); text-align:center; letter-spacing:.5px; line-height:1.7;}
+.success{display:none; flex-direction:column; align-items:center; text-align:center; padding:48px 32px; gap:16px;}
+.success.show{display:flex;}
+.success-icon{width:72px; height:72px; background:rgba(74,222,128,.1); border:2px solid #4ADE80; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:32px;}
+.success-title{font-family:'Bebas Neue',sans-serif; font-size:32px; color:var(--off-white);}
+.success-text{font-size:14px; color:var(--muted); line-height:1.7; max-width:360px;}
+.success-email{color:var(--gold2); font-weight:600;}
+.btn-back{font-family:'Space Mono',monospace; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; background:transparent; color:var(--off-white); border:1px solid rgba(232,230,240,.25); border-radius:4px; padding:12px 28px; cursor:pointer; margin-top:8px; text-decoration:none; display:inline-block; transition:all .2s;}
+.btn-back:hover{border-color:var(--gold2); color:var(--gold2);}
+.form-wrap.hide{display:none;}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <a href="index.html" class="back-link">&#8592; Torna alla home</a>
+  <div class="brand">POSITION <span>KEY</span></div>
+</div>
+
+<div class="card">
+
+  <div class="success" id="successBox">
+    <div class="success-icon">&#10003;</div>
+    <div class="success-title">Messaggio Inviato!</div>
+    <p class="success-text">
+      Il tuo messaggio &egrave; stato inviato a<br>
+      <span class="success-email">helppositionkey@proton.me</span><br><br>
+      Ti risponderemo il prima possibile.
+    </p>
+    <a href="index.html" class="btn-back">Torna alla Home</a>
+  </div>
+
+  <div class="form-wrap" id="formWrap">
+    <div class="card-header">
+      <div class="card-title">Contattaci</div>
+      <div class="card-sub">Scrivici &mdash; ti risponderemo al pi&ugrave; presto</div>
+    </div>
+
+    <div class="card-body">
+
+      <div class="form-row">
+        <div class="form-field">
+          <label class="form-label" for="cNome">Nome <span>*</span></label>
+          <input class="form-input" id="cNome" type="text" placeholder="Mario" autocomplete="given-name">
+          <div class="form-error" id="ecNome">Campo obbligatorio</div>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="cCognome">Cognome <span>*</span></label>
+          <input class="form-input" id="cCognome" type="text" placeholder="Rossi" autocomplete="family-name">
+          <div class="form-error" id="ecCognome">Campo obbligatorio</div>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label class="form-label" for="cEmail">Email <span>*</span></label>
+        <input class="form-input" id="cEmail" type="email" placeholder="mario.rossi@email.com" autocomplete="email" inputmode="email">
+        <div class="form-error" id="ecEmail">Inserisci un indirizzo email valido</div>
+      </div>
+
+      <div class="form-field">
+        <label class="form-label" for="cMsg">Messaggio <span>*</span></label>
+        <textarea class="form-textarea" id="cMsg" placeholder="Scrivi qui il tuo messaggio..."></textarea>
+        <div class="form-error" id="ecMsg">Inserisci il tuo messaggio</div>
+      </div>
+
+      <button class="btn-submit" id="btnInvia">
+        <span class="btn-text">Invia Messaggio</span>
+        <div class="spinner"></div>
+      </button>
+
+      <div class="disclaimer">
+        Inviando il modulo accetti di essere contattato a helppositionkey@proton.me
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+function req(id, eid){
+  var el = document.getElementById(id), er = document.getElementById(eid);
+  if (!el.value.trim()){ el.classList.add('error'); er.classList.add('show'); return false; }
+  el.classList.remove('error'); er.classList.remove('show'); return true;
+}
+function reqEmail(id, eid){
+  var el = document.getElementById(id), er = document.getElementById(eid);
+  var v = el.value.trim();
+  var ok = v.length > 0 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  if (!ok){ el.classList.add('error'); er.classList.add('show'); return false; }
+  el.classList.remove('error'); er.classList.remove('show'); return true;
+}
+
+// Live validation
+document.getElementById('cNome').addEventListener('blur', function(){ req('cNome','ecNome'); });
+document.getElementById('cCognome').addEventListener('blur', function(){ req('cCognome','ecCognome'); });
+document.getElementById('cEmail').addEventListener('blur', function(){ reqEmail('cEmail','ecEmail'); });
+document.getElementById('cMsg').addEventListener('blur', function(){ req('cMsg','ecMsg'); });
+
+document.getElementById('btnInvia').addEventListener('click', function(){
+  var ok = true;
+  ok = req('cNome','ecNome') && ok;
+  ok = req('cCognome','ecCognome') && ok;
+  ok = reqEmail('cEmail','ecEmail') && ok;
+  ok = req('cMsg','ecMsg') && ok;
+  if (!ok){
+    var fe = document.querySelector('.form-input.error, .form-textarea.error');
+    if (fe) fe.scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+
+  var btn = document.getElementById('btnInvia');
+  btn.classList.add('loading'); btn.disabled = true;
+
+  var nome    = document.getElementById('cNome').value.trim();
+  var cognome = document.getElementById('cCognome').value.trim();
+  var email   = document.getElementById('cEmail').value.trim();
+  var msg     = document.getElementById('cMsg').value.trim();
+
+  var sub  = encodeURIComponent('Messaggio da ' + nome + ' ' + cognome + ' - Position Key');
+  var body = encodeURIComponent(
+    'Mittente: ' + nome + ' ' + cognome + '\n' +
+    'Email:    ' + email + '\n' +
+    '==============================\n\n' +
+    msg + '\n\n' +
+    '==============================\nInviato dal sito Position Key'
+  );
+
+  window.location.href = 'mailto:helppositionkey@proton.me?subject=' + sub + '&body=' + body;
+
+  setTimeout(function(){
+    document.getElementById('formWrap').classList.add('hide');
+    document.getElementById('successBox').classList.add('show');
+    btn.classList.remove('loading'); btn.disabled = false;
+  }, 900);
+});
+</script>
+</body>
+</html>
