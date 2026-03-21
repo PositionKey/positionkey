@@ -915,6 +915,20 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: none; }
 /* ================================================
    MODAL CONTATTO
 ================================================ */
+#modalOverlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: rgba(8,11,20,.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+#modalOverlay.open { display: flex; }
 #contactOverlay { display:none; position:fixed; inset:0; z-index:9100;
   background:rgba(8,11,20,.9); backdrop-filter:blur(8px);
   -webkit-backdrop-filter:blur(8px);
@@ -944,7 +958,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: none; }
 .contact-form-wrap.hide { display:none; }
 
 
-/* ---- OVERLAY FIX ---- */
+
 #modalOverlay, #contactOverlay {
   display: none;
   position: fixed !important;
@@ -1325,7 +1339,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: none; }
   <div class="footer-motto">"Integrity · Precision · Fidelity" — v3.5.0 &amp; Plus v1.0</div>
 </footer>
 <!-- MODAL RICHIEDI ACCESSO -->
-<div id="modalOverlay" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+<div id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal">
     <div class="modal-success" id="modalSuccess">
       <div class="success-icon">&#10003;</div>
