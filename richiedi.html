@@ -95,7 +95,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--night);color:va
     <div class="success-icon">&#10003;</div>
     <div class="success-title">Richiesta Inviata!</div>
     <p class="success-text">La tua richiesta &egrave; stata inviata a<br>
-      <span class="success-email">helppositionkey@proton.me</span><br><br>
+      <span class="success-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e8808d849898879b819c818786838d91a8989a879c8786c6858d">[email&#160;protected]</a></span><br><br>
       Riceverai la tua License Key entro 24 ore.
     </p>
     <a href="index.html" class="btn-back">Torna alla Home</a>
@@ -128,10 +128,11 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--night);color:va
             <select class="form-select" id="fPiat">
               <option value="" disabled selected>Seleziona&hellip;</option>
               <option>MT5 (MetaTrader 5)</option>
-              <option>cTrader</option>
+              <option disabled style="color:#6B7280;">cTrader — in rilascio prossimamente</option>
             </select>
           </div>
           <div class="form-error" id="ePiat">Seleziona una piattaforma</div>
+          <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-top:5px;letter-spacing:.5px;">⚠ cTrader — in rilascio prossimamente</div>
         </div>
         <div class="form-field">
           <label class="form-label" for="fVer">Versione <span>*</span></label>
@@ -181,6 +182,9 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--night);color:va
           </div>
         </div>
         <div class="form-error" id="ePag">Seleziona un metodo di pagamento</div>
+        <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-top:8px;letter-spacing:.4px;line-height:1.7;padding:8px 12px;background:rgba(124,58,237,.05);border:1px solid rgba(124,58,237,.12);border-radius:4px;">
+          &#8505;&nbsp; Riceverete i dettagli per effettuare il pagamento via mail dopo l&rsquo;invio del modulo
+        </div>
       </div>
 
       <div class="form-field">
@@ -205,7 +209,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--night);color:va
       </button>
 
       <div class="disclaimer">
-        Inviando il modulo accetti di essere contattato a helppositionkey@proton.me<br>
+        Inviando il modulo accetti di essere contattato a <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="533b363f23233c203a273a3c3d38362a1323213c273c3d7d3e36">[email&#160;protected]</a><br>
         La licenza verr&agrave; emessa dopo conferma del pagamento.
       </div>
 
@@ -213,7 +217,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--night);color:va
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 var PREZZI = {
   'Standard (v3.5.0)': { usdt:'35 USDT', bon:'50 €', usdtVal:'USDT 35 (Standard)', bonVal:'Bonifico 50€ (Standard)' },
   'Plus (v1.0)':       { usdt:'50 USDT', bon:'65 €', usdtVal:'USDT 50 (Plus)',     bonVal:'Bonifico 65€ (Plus)'     }
@@ -267,10 +271,4 @@ document.getElementById('btnInvia').addEventListener('click', function(){
   var noteU=pagamento.isUsdt?'\nNOTE USDT: inserire numero account nelle note: '+acc:'';
   var notePF=propFirmSel?'\nLicenza PropFirm: SI - 3 mesi rinnovabili':'';
   var sub=encodeURIComponent('Richiesta Licenza Position Key - '+nome+' '+cognome);
-  var body=encodeURIComponent('Richiesta Licenza Position Key\n==============================\nNome: '+nome+'\nCognome: '+cognome+'\nPiattaforma: '+piat+'\nVersione: '+ver+'\nAccount: '+acc+'\nPagamento: '+pagamento.val+noteU+notePF+'\n==============================\nInviato dal sito Position Key');
-  window.location.href='mailto:helppositionkey@proton.me?subject='+sub+'&body='+body;
-  setTimeout(function(){document.getElementById('formWrap').classList.add('hide');document.getElementById('successBox').classList.add('show');btn.classList.remove('loading');btn.disabled=false;},900);
-});
-</script>
-</body>
-</html>
+  var body=encodeURIComponent('Richiesta Licenza Position Key\n==============================\nNome: '+nome+'\nCognome: '+cognome+'\nPiattaforma: '+piat+'\nVersione: '+ver+'\nAccount: '+acc+'\nPagamento: '+pagamento.val+noteU+notePF+'\n=================
