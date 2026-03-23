@@ -2380,45 +2380,35 @@ function pkInitLang() {
 
 </script>
 <script>
-/* Lang switcher init */
+/* Lang switcher */
 (function(){
   var btn  = document.getElementById('pkLangBtn');
   var wrap = document.getElementById('pkLangWrap');
   var drop = document.getElementById('pkLangDropdown');
   if(!btn || !wrap || !drop) return;
 
-  var isOpen = false;
+  /* Click sul bottone — apri/chiudi */
+  btn.onclick = function(e){
+    e.stopPropagation();
+    var isOpen = wrap.classList.contains('open');
+    wrap.classList.toggle('open', !isOpen);
+  };
 
-  function openDrop()  { isOpen=true;  wrap.classList.add('open'); }
-  function closeDrop() { isOpen=false; wrap.classList.remove('open'); }
-
-  /* mousedown invece di click — si registra prima della propagazione */
-  btn.addEventListener('mousedown', function(e){
-    e.preventDefault(); e.stopPropagation();
-    if(isOpen) closeDrop(); else openDrop();
-  });
-
-  /* touch per mobile */
-  btn.addEventListener('touchend', function(e){
-    e.preventDefault(); e.stopPropagation();
-    if(isOpen) closeDrop(); else openDrop();
-  });
-
-  /* Chiudi cliccando fuori */
-  document.addEventListener('mousedown', function(e){
-    if(!wrap.contains(e.target)) closeDrop();
-  });
-
-  /* Selezione lingua */
+  /* Click su una lingua */
   drop.querySelectorAll('.pk-lang-item').forEach(function(item){
-    item.addEventListener('mousedown', function(e){
+    item.onclick = function(e){
       e.stopPropagation();
       if(typeof pkSetLang === 'function') pkSetLang(this.getAttribute('data-lang'));
-      closeDrop();
-    });
+      wrap.classList.remove('open');
+    };
   });
 
-  /* Inizializza lingua dal browser o localStorage */
+  /* Click fuori — chiudi */
+  document.addEventListener('click', function(e){
+    if(!wrap.contains(e.target)) wrap.classList.remove('open');
+  });
+
+  /* Inizializza lingua */
   if(typeof pkInitLang === 'function') pkInitLang();
 })();
 </script>
