@@ -95,7 +95,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--night);color:va
     <div class="success-icon">&#10003;</div>
     <div class="success-title">Richiesta Inviata!</div>
     <p class="success-text">La tua richiesta &egrave; stata inviata a<br>
-      <span class="success-email">helppositionkey@proton.me</span><br><br>
+      <span class="success-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cba3aea7bbbba4b8a2bfa2a4a5a0aeb28bbbb9a4bfa4a5e5a6ae">[email&#160;protected]</a></span><br><br>
       Riceverai la tua License Key entro 24 ore.
     </p>
     <a href="index.html" class="btn-back">Torna alla Home</a>
@@ -216,14 +216,14 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--night);color:va
       </button>
 
       <div class="disclaimer">
-        Inviando il modulo accetti di essere contattato a helppositionkey@proton.me<br>
+        Inviando il modulo accetti di essere contattato a <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6f070a031f1f001c061b060001040a162f1f1d001b000141020a">[email&#160;protected]</a><br>
         La licenza verr&agrave; emessa dopo conferma del pagamento.
       </div>
 
     </div>
   </div>
 </div>
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 var PREZZI = {
   'Standard (v3.5.0)': { usdt:'35 USDT', bon:'50 \u20ac', usdtVal:'USDT 35 (Standard)', bonVal:'Bonifico 50\u20ac (Standard)' },
   'Plus (v1.0)':       { usdt:'50 USDT', bon:'65 \u20ac', usdtVal:'USDT 50 (Plus)',     bonVal:'Bonifico 65\u20ac (Plus)'     }
@@ -304,7 +304,23 @@ document.getElementById('btnInvia').onclick = function() {
   var ver     = document.getElementById('fVer').value;
   var acc     = document.getElementById('fAcc').value.trim();
   var noteU   = pagamento.isUsdt ? ' (conto nelle note: ' + acc + ')' : '';
-  var notePF  = propFirmSel ? 'SI (3 mesi rinnovabili)' : 'NO';
+  var notePF  = propFirmSel ? 'SI — Valida 3 mesi, rinnovabile gratuitamente' : 'NO';
+
+  // Calcolo prezzi e totale
+  var P = PREZZI[ver] || PREZZI['Plus (v1.0)'];
+  var prezzoBase, prezzoPF, totale;
+  if (pagamento.isUsdt) {
+    prezzoBase = ver === 'Standard (v3.5.0)' ? '35 USDT' : '50 USDT';
+    prezzoPF   = propFirmSel ? '+ 20 USDT (PropFirm)' : '';
+    totale     = pagamento.isUsdt
+      ? (ver === 'Standard (v3.5.0)' ? (propFirmSel ? '55 USDT' : '35 USDT') : (propFirmSel ? '70 USDT' : '50 USDT'))
+      : '';
+  } else {
+    prezzoBase = ver === 'Standard (v3.5.0)' ? '50 EUR' : '65 EUR';
+    prezzoPF   = propFirmSel ? '+ 30 EUR (PropFirm)' : '';
+    totale     = ver === 'Standard (v3.5.0)' ? (propFirmSel ? '80 EUR' : '50 EUR') : (propFirmSel ? '95 EUR' : '65 EUR');
+  }
+  var riepilogoOrdine = prezzoBase + (propFirmSel ? ' ' + prezzoPF + ' = TOTALE: ' + totale : ' = TOTALE: ' + (pagamento.isUsdt ? (ver==='Standard (v3.5.0)'?'35 USDT':'50 USDT') : (ver==='Standard (v3.5.0)'?'50 EUR':'65 EUR')));
 
   fetch('https://formspree.io/f/xojkgady', {
     method: 'POST',
@@ -319,7 +335,8 @@ document.getElementById('btnInvia').onclick = function() {
       'Versione':         ver,
       'Account Trading':  acc,
       'Metodo Pagamento': pagamento.val + noteU,
-      'Licenza PropFirm': notePF
+      'Licenza PropFirm': notePF,
+      'Riepilogo Ordine': riepilogoOrdine
     })
   })
   .then(function(res) {
@@ -340,7 +357,6 @@ document.getElementById('btnInvia').onclick = function() {
     alert('Errore connessione: ' + err.message);
   });
 };
-
 </script>
 </body>
 </html>
