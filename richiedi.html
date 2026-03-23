@@ -95,7 +95,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--night);color:va
     <div class="success-icon">&#10003;</div>
     <div class="success-title">Richiesta Inviata!</div>
     <p class="success-text">La tua richiesta &egrave; stata inviata a<br>
-      <span class="success-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="660e030a161609150f120f09080d031f26161409120908480b03">[email&#160;protected]</a></span><br><br>
+      <span class="success-email">helppositionkey@proton.me</span><br><br>
       Riceverai la tua License Key entro 24 ore.
     </p>
     <a href="index.html" class="btn-back">Torna alla Home</a>
@@ -119,6 +119,13 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--night);color:va
           <input class="form-input" id="fCognome" type="text" placeholder="Rossi" autocomplete="family-name">
           <div class="form-error" id="eCognome">Campo obbligatorio</div>
         </div>
+      </div>
+
+      <div class="form-field">
+        <label class="form-label" for="fEmail">Email <span>*</span></label>
+        <input class="form-input" id="fEmail" type="email"
+          placeholder="mario.rossi@email.com" autocomplete="email" inputmode="email">
+        <div class="form-error" id="eEmail">Inserisci un indirizzo email valido</div>
       </div>
 
       <div class="form-row">
@@ -164,7 +171,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--night);color:va
           &nbsp;<span id="hintVer" style="color:var(--gold2);font-size:8px;letter-spacing:1px;font-family:'Space Mono',monospace;">(seleziona prima la versione)</span>
         </div>
         <div class="pricing-section">
-          <div class="pricing-card" id="cardUsdt">
+          <div class="pricing-card" id="cardUsdt" onclick="selezionaPagamento('usdt')">
             <div class="pricing-radio"></div>
             <div class="pricing-info">
               <div class="pricing-name">Pagamento USDT</div>
@@ -172,7 +179,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--night);color:va
             </div>
             <div class="pricing-price" id="prezzoUsdt">50 USDT</div>
           </div>
-          <div class="pricing-card" id="cardBonifico">
+          <div class="pricing-card" id="cardBonifico" onclick="selezionaPagamento('bonifico')">
             <div class="pricing-radio"></div>
             <div class="pricing-info">
               <div class="pricing-name">Bonifico Bancario</div>
@@ -192,7 +199,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--night);color:va
           Licenza Aggiuntiva PropFirm
           <span style="color:var(--muted);text-transform:none;letter-spacing:0;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:400;"> &mdash; opzionale</span>
         </div>
-        <div class="propfirm-card" id="cardPropFirm">
+        <div class="propfirm-card" id="cardPropFirm" onclick="togglePropFirm()">
           <div class="propfirm-check" id="pfCheck">&#10003;</div>
           <div class="propfirm-info">
             <div class="propfirm-name">Licenza PropFirm</div>
@@ -209,14 +216,14 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--night);color:va
       </button>
 
       <div class="disclaimer">
-        Inviando il modulo accetti di essere contattato a <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1c7479706c6c736f75687573727779655c6c6e73687372327179">[email&#160;protected]</a><br>
+        Inviando il modulo accetti di essere contattato a helppositionkey@proton.me<br>
         La licenza verr&agrave; emessa dopo conferma del pagamento.
       </div>
 
     </div>
   </div>
 </div>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 var PREZZI = {
   'Standard (v3.5.0)': { usdt:'35 USDT', bon:'50 €', usdtVal:'USDT 35 (Standard)', bonVal:'Bonifico 50€ (Standard)' },
   'Plus (v1.0)':       { usdt:'50 USDT', bon:'65 €', usdtVal:'USDT 50 (Plus)',     bonVal:'Bonifico 65€ (Plus)'     }
@@ -234,30 +241,27 @@ document.getElementById('fVer').onchange = function(){
   if (pagamento) pagamento.val = pagamento.isUsdt ? p.usdtVal : p.bonVal;
 };
 
-/* Selezione USDT */
-document.getElementById('cardUsdt').onclick = function(){
-  this.classList.add('selected');
-  document.getElementById('cardBonifico').classList.remove('selected');
+/* Selezione pagamento — funzione globale chiamata da onclick HTML */
+function selezionaPagamento(tipo) {
   var p = PREZZI[document.getElementById('fVer').value] || PREZZI['Plus (v1.0)'];
-  pagamento = { val: p.usdtVal, isUsdt: true };
+  if (tipo === 'usdt') {
+    document.getElementById('cardUsdt').classList.add('selected');
+    document.getElementById('cardBonifico').classList.remove('selected');
+    pagamento = { val: p.usdtVal, isUsdt: true };
+  } else {
+    document.getElementById('cardBonifico').classList.add('selected');
+    document.getElementById('cardUsdt').classList.remove('selected');
+    pagamento = { val: p.bonVal, isUsdt: false };
+  }
   document.getElementById('ePag').style.display = 'none';
-};
+}
 
-/* Selezione Bonifico */
-document.getElementById('cardBonifico').onclick = function(){
-  this.classList.add('selected');
-  document.getElementById('cardUsdt').classList.remove('selected');
-  var p = PREZZI[document.getElementById('fVer').value] || PREZZI['Plus (v1.0)'];
-  pagamento = { val: p.bonVal, isUsdt: false };
-  document.getElementById('ePag').style.display = 'none';
-};
-
-/* Toggle PropFirm */
-document.getElementById('cardPropFirm').onclick = function(){
+/* Toggle PropFirm — funzione globale chiamata da onclick HTML */
+function togglePropFirm() {
   propFirmSel = !propFirmSel;
-  this.classList.toggle('selected', propFirmSel);
+  document.getElementById('cardPropFirm').classList.toggle('selected', propFirmSel);
   document.getElementById('pfNote').classList.toggle('show', propFirmSel);
-};
+}
 
 /* Validazione */
 function req(id, eid){
@@ -265,7 +269,13 @@ function req(id, eid){
   if (!el.value.trim()){ el.classList.add('error'); er.classList.add('show'); return false; }
   el.classList.remove('error'); er.classList.remove('show'); return true;
 }
-function reqSel(id, eid){
+function reqEmail(id, eid){
+  var el=document.getElementById(id), er=document.getElementById(eid);
+  if(!el||!er) return true;
+  var v=el.value.trim(), ok=v.length>0&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  if(!ok){ el.classList.add('error'); er.classList.add('show'); return false; }
+  el.classList.remove('error'); er.classList.remove('show'); return true;
+}
   var el=document.getElementById(id), er=document.getElementById(eid);
   if (!el.value){ el.classList.add('error'); er.classList.add('show'); return false; }
   el.classList.remove('error'); er.classList.remove('show'); return true;
@@ -276,6 +286,7 @@ document.getElementById('btnInvia').onclick = function(){
   var ok = true;
   ok = req('fNome','eNome')       && ok;
   ok = req('fCognome','eCognome') && ok;
+  ok = reqEmail('fEmail','eEmail')&& ok;
   ok = reqSel('fPiat','ePiat')    && ok;
   ok = reqSel('fVer','eVer')      && ok;
   ok = req('fAcc','eAcc')         && ok;
@@ -293,19 +304,22 @@ document.getElementById('btnInvia').onclick = function(){
 
   var nome    = document.getElementById('fNome').value.trim();
   var cognome = document.getElementById('fCognome').value.trim();
+  var email   = document.getElementById('fEmail').value.trim();
   var piat    = document.getElementById('fPiat').value;
   var ver     = document.getElementById('fVer').value;
   var acc     = document.getElementById('fAcc').value.trim();
   var noteU   = pagamento.isUsdt ? ' — NOTE: conto nelle note: ' + acc : '';
   var notePF  = propFirmSel ? 'SI (3 mesi rinnovabili)' : 'NO';
 
-  fetch('https://formspree.io/f/xwvrdgjk', {
+  fetch('https://formspree.io/f/xojkgady', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body: JSON.stringify({
+    headers: { 'Accept': 'application/json' },
+    body: new URLSearchParams({
       '_subject':         'Richiesta Licenza — ' + nome + ' ' + cognome,
+      '_replyto':         email,
       'Nome':             nome,
       'Cognome':          cognome,
+      'Email':            email,
       'Piattaforma':      piat,
       'Versione':         ver,
       'Account Trading':  acc,
@@ -319,12 +333,16 @@ document.getElementById('btnInvia').onclick = function(){
       document.getElementById('formWrap').classList.add('hide');
       document.getElementById('successBox').classList.add('show');
     } else {
-      alert('Errore nell\'invio. Riprova o contatta helppositionkey@proton.me');
+      res.json().then(function(data){
+        alert('Errore Formspree: ' + (data.error || data.errors?.[0]?.message || res.status));
+      }).catch(function(){
+        alert('Errore HTTP ' + res.status + '. Controlla che il form Formspree sia attivo.');
+      });
     }
   })
-  .catch(function(){
+  .catch(function(err){
     btn.classList.remove('loading'); btn.disabled = false;
-    alert('Errore di connessione. Controlla la tua rete e riprova.');
+    alert('Errore di connessione: ' + err.message);
   });
 };
 </script>

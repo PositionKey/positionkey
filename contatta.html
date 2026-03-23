@@ -110,7 +110,7 @@ body{
     <div class="success-title">Messaggio Inviato!</div>
     <p class="success-text">
       Il tuo messaggio &egrave; stato inviato a<br>
-      <span class="success-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e58d808995958a968c918c8a8b8e809ca595978a918a8bcb8880">[email&#160;protected]</a></span><br><br>
+      <span class="success-email">helppositionkey@proton.me</span><br><br>
       Ti risponderemo il prima possibile.
     </p>
     <a href="index.html" class="btn-back">Torna alla Home</a>
@@ -155,7 +155,7 @@ body{
       </button>
 
       <div class="disclaimer">
-        Inviando il modulo accetti di essere contattato a <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="85ede0e9f5f5eaf6ecf1eceaebeee0fcc5f5f7eaf1eaebabe8e0">[email&#160;protected]</a>
+        Inviando il modulo accetti di essere contattato a helppositionkey@proton.me
       </div>
 
     </div>
@@ -163,7 +163,7 @@ body{
 
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 function req(id, eid){
   var el = document.getElementById(id), er = document.getElementById(eid);
   if (!el.value.trim()){ el.classList.add('error'); er.classList.add('show'); return false; }
@@ -205,8 +205,8 @@ document.getElementById('btnInvia').addEventListener('click', function(){
 
   fetch('https://formspree.io/f/xnjgkeyp', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body: JSON.stringify({
+    headers: { 'Accept': 'application/json' },
+    body: new URLSearchParams({
       '_subject':  'Messaggio da ' + nome + ' ' + cognome + ' — Position Key',
       '_replyto':  email,
       'Nome':      nome,
@@ -221,12 +221,16 @@ document.getElementById('btnInvia').addEventListener('click', function(){
       document.getElementById('formWrap').classList.add('hide');
       document.getElementById('successBox').classList.add('show');
     } else {
-      alert('Errore nell\'invio. Riprova o contatta helppositionkey@proton.me');
+      res.json().then(function(data){
+        alert('Errore Formspree: ' + (data.error || res.status));
+      }).catch(function(){
+        alert('Errore HTTP ' + res.status + '. Verifica che il form Formspree sia attivo.');
+      });
     }
   })
-  .catch(function(){
+  .catch(function(err){
     btn.classList.remove('loading'); btn.disabled = false;
-    alert('Errore di connessione. Controlla la tua rete e riprova.');
+    alert('Errore di connessione: ' + err.message);
   });
 });
 </script>
