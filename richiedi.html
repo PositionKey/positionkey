@@ -95,7 +95,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--night);color:va
     <div class="success-icon">&#10003;</div>
     <div class="success-title">Richiesta Inviata!</div>
     <p class="success-text">La tua richiesta &egrave; stata inviata a<br>
-      <span class="success-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e8808d849898879b819c818786838d91a8989a879c8786c6858d">[email&#160;protected]</a></span><br><br>
+      <span class="success-email">helppositionkey@proton.me</span><br><br>
       Riceverai la tua License Key entro 24 ore.
     </p>
     <a href="index.html" class="btn-back">Torna alla Home</a>
@@ -209,66 +209,116 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--night);color:va
       </button>
 
       <div class="disclaimer">
-        Inviando il modulo accetti di essere contattato a <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="533b363f23233c203a273a3c3d38362a1323213c273c3d7d3e36">[email&#160;protected]</a><br>
+        Inviando il modulo accetti di essere contattato a helppositionkey@proton.me<br>
         La licenza verr&agrave; emessa dopo conferma del pagamento.
       </div>
 
     </div>
   </div>
 </div>
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 var PREZZI = {
   'Standard (v3.5.0)': { usdt:'35 USDT', bon:'50 €', usdtVal:'USDT 35 (Standard)', bonVal:'Bonifico 50€ (Standard)' },
   'Plus (v1.0)':       { usdt:'50 USDT', bon:'65 €', usdtVal:'USDT 50 (Plus)',     bonVal:'Bonifico 65€ (Plus)'     }
 };
-var pagamento = null;
+var pagamento   = null;
 var propFirmSel = false;
 
-document.getElementById('fVer').addEventListener('change', function(){
-  var p = PREZZI[this.value]; if(!p) return;
-  document.getElementById('prezzoUsdt').textContent = p.usdt;
+/* Aggiorna prezzi al cambio versione */
+document.getElementById('fVer').onchange = function(){
+  var p = PREZZI[this.value];
+  if (!p) return;
+  document.getElementById('prezzoUsdt').textContent    = p.usdt;
   document.getElementById('prezzoBonifico').textContent = p.bon;
   document.getElementById('hintVer').style.display = 'none';
-  if(pagamento) pagamento.val = pagamento.isUsdt ? p.usdtVal : p.bonVal;
-});
+  if (pagamento) pagamento.val = pagamento.isUsdt ? p.usdtVal : p.bonVal;
+};
 
-document.getElementById('cardUsdt').addEventListener('click', function(){
-  document.getElementById('cardUsdt').classList.add('selected');
+/* Selezione USDT */
+document.getElementById('cardUsdt').onclick = function(){
+  this.classList.add('selected');
   document.getElementById('cardBonifico').classList.remove('selected');
   var p = PREZZI[document.getElementById('fVer').value] || PREZZI['Plus (v1.0)'];
-  pagamento = {val: p.usdtVal, isUsdt: true};
+  pagamento = { val: p.usdtVal, isUsdt: true };
   document.getElementById('ePag').style.display = 'none';
-});
+};
 
-document.getElementById('cardBonifico').addEventListener('click', function(){
-  document.getElementById('cardBonifico').classList.add('selected');
+/* Selezione Bonifico */
+document.getElementById('cardBonifico').onclick = function(){
+  this.classList.add('selected');
   document.getElementById('cardUsdt').classList.remove('selected');
   var p = PREZZI[document.getElementById('fVer').value] || PREZZI['Plus (v1.0)'];
-  pagamento = {val: p.bonVal, isUsdt: false};
+  pagamento = { val: p.bonVal, isUsdt: false };
   document.getElementById('ePag').style.display = 'none';
-});
+};
 
-document.getElementById('cardPropFirm').addEventListener('click', function(){
+/* Toggle PropFirm */
+document.getElementById('cardPropFirm').onclick = function(){
   propFirmSel = !propFirmSel;
   this.classList.toggle('selected', propFirmSel);
   document.getElementById('pfNote').classList.toggle('show', propFirmSel);
-});
+};
 
-function req(id,eid){var el=document.getElementById(id),er=document.getElementById(eid);if(!el.value.trim()){el.classList.add('error');er.classList.add('show');return false;}el.classList.remove('error');er.classList.remove('show');return true;}
-function reqSel(id,eid){var el=document.getElementById(id),er=document.getElementById(eid);if(!el.value){el.classList.add('error');er.classList.add('show');return false;}el.classList.remove('error');er.classList.remove('show');return true;}
+/* Validazione */
+function req(id, eid){
+  var el=document.getElementById(id), er=document.getElementById(eid);
+  if (!el.value.trim()){ el.classList.add('error'); er.classList.add('show'); return false; }
+  el.classList.remove('error'); er.classList.remove('show'); return true;
+}
+function reqSel(id, eid){
+  var el=document.getElementById(id), er=document.getElementById(eid);
+  if (!el.value){ el.classList.add('error'); er.classList.add('show'); return false; }
+  el.classList.remove('error'); er.classList.remove('show'); return true;
+}
 
-document.getElementById('btnInvia').addEventListener('click', function(){
-  var ok = req('fNome','eNome') & req('fCognome','eCognome') & reqSel('fPiat','ePiat') & reqSel('fVer','eVer') & req('fAcc','eAcc');
-  if(!pagamento){document.getElementById('ePag').classList.add('show');ok=false;}
-  if(!ok){var fe=document.querySelector('.form-input.error,.form-select.error');if(fe)fe.scrollIntoView({behavior:'smooth',block:'center'});return;}
-  var btn=document.getElementById('btnInvia'); btn.classList.add('loading'); btn.disabled=true;
-  var nome=document.getElementById('fNome').value.trim();
-  var cognome=document.getElementById('fCognome').value.trim();
-  var piat=document.getElementById('fPiat').value;
-  var ver=document.getElementById('fVer').value;
-  var acc=document.getElementById('fAcc').value.trim();
-  var noteU=pagamento.isUsdt?'\nNOTE USDT: inserire numero account nelle note: '+acc:'';
-  var notePF=propFirmSel?'\nLicenza PropFirm: SI - 3 mesi rinnovabili':'';
-  var sub=encodeURIComponent('Richiesta Licenza Position Key - '+nome+' '+cognome);
-  var body=encodeURIComponent('Richiesta Licenza Position Key\n==============================\nNome: '+nome+'\nCognome: '+cognome+'\nPiattaforma: '+piat+'\nVersione: '+ver+'\nAccount: '+acc+'\nPagamento: '+pagamento.val+noteU+notePF+'\n=================
+/* Submit */
+document.getElementById('btnInvia').onclick = function(){
+  var ok = true;
+  ok = req('fNome','eNome')       && ok;
+  ok = req('fCognome','eCognome') && ok;
+  ok = reqSel('fPiat','ePiat')    && ok;
+  ok = reqSel('fVer','eVer')      && ok;
+  ok = req('fAcc','eAcc')         && ok;
+  if (!pagamento){
+    document.getElementById('ePag').classList.add('show');
+    ok = false;
+  }
+  if (!ok){
+    var fe = document.querySelector('.form-input.error,.form-select.error');
+    if (fe) fe.scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+  var btn = document.getElementById('btnInvia');
+  btn.classList.add('loading'); btn.disabled = true;
+
+  var nome    = document.getElementById('fNome').value.trim();
+  var cognome = document.getElementById('fCognome').value.trim();
+  var piat    = document.getElementById('fPiat').value;
+  var ver     = document.getElementById('fVer').value;
+  var acc     = document.getElementById('fAcc').value.trim();
+  var noteU   = pagamento.isUsdt ? '\nNOTE USDT: inserire numero account nelle note: ' + acc : '';
+  var notePF  = propFirmSel ? '\nLicenza PropFirm: SI - 3 mesi rinnovabili' : '';
+
+  var sub  = encodeURIComponent('Richiesta Licenza Position Key - ' + nome + ' ' + cognome);
+  var body = encodeURIComponent(
+    'Richiesta Licenza Position Key\n==============================\n' +
+    'Nome:        ' + nome    + '\n' +
+    'Cognome:     ' + cognome + '\n' +
+    'Piattaforma: ' + piat    + '\n' +
+    'Versione:    ' + ver     + '\n' +
+    'Account:     ' + acc     + '\n' +
+    'Pagamento:   ' + pagamento.val + noteU + notePF + '\n' +
+    '==============================\nInviato dal sito Position Key'
+  );
+
+  window.location.href = 'mailto:helppositionkey@proton.me?subject=' + sub + '&body=' + body;
+
+  setTimeout(function(){
+    document.getElementById('formWrap').classList.add('hide');
+    document.getElementById('successBox').classList.add('show');
+    btn.classList.remove('loading'); btn.disabled = false;
+  }, 900);
+};
+</script>
+</body>
+</html>
