@@ -322,7 +322,7 @@ document.getElementById('btnInvia').onclick = function() {
   }
   var riepilogoOrdine = prezzoBase + (propFirmSel ? ' ' + prezzoPF + ' = TOTALE: ' + totale : ' = TOTALE: ' + (pagamento.isUsdt ? (ver==='Standard (v3.5.0)'?'35 USDT':'50 USDT') : (ver==='Standard (v3.5.0)'?'50 EUR':'65 EUR')));
 
-  fetch('https://formspree.io/f/xojkgady', {
+  fetch('https://formspree.io/f/xwvrdgjk', {
     method: 'POST',
     headers: { 'Accept': 'application/json' },
     body: new URLSearchParams({
