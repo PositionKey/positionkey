@@ -95,7 +95,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--night);color:va
     <div class="success-icon">&#10003;</div>
     <div class="success-title">Richiesta Inviata!</div>
     <p class="success-text">La tua richiesta &egrave; stata inviata a<br>
-      <span class="success-email">helppositionkey@proton.me</span><br><br>
+      <span class="success-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="660e030a161609150f120f09080d031f26161409120908480b03">[email&#160;protected]</a></span><br><br>
       Riceverai la tua License Key entro 24 ore.
     </p>
     <a href="index.html" class="btn-back">Torna alla Home</a>
@@ -209,14 +209,14 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--night);color:va
       </button>
 
       <div class="disclaimer">
-        Inviando il modulo accetti di essere contattato a helppositionkey@proton.me<br>
+        Inviando il modulo accetti di essere contattato a <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1c7479706c6c736f75687573727779655c6c6e73687372327179">[email&#160;protected]</a><br>
         La licenza verr&agrave; emessa dopo conferma del pagamento.
       </div>
 
     </div>
   </div>
 </div>
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 var PREZZI = {
   'Standard (v3.5.0)': { usdt:'35 USDT', bon:'50 €', usdtVal:'USDT 35 (Standard)', bonVal:'Bonifico 50€ (Standard)' },
   'Plus (v1.0)':       { usdt:'50 USDT', bon:'65 €', usdtVal:'USDT 50 (Plus)',     bonVal:'Bonifico 65€ (Plus)'     }
@@ -296,28 +296,36 @@ document.getElementById('btnInvia').onclick = function(){
   var piat    = document.getElementById('fPiat').value;
   var ver     = document.getElementById('fVer').value;
   var acc     = document.getElementById('fAcc').value.trim();
-  var noteU   = pagamento.isUsdt ? '\nNOTE USDT: inserire numero account nelle note: ' + acc : '';
-  var notePF  = propFirmSel ? '\nLicenza PropFirm: SI - 3 mesi rinnovabili' : '';
+  var noteU   = pagamento.isUsdt ? ' — NOTE: conto nelle note: ' + acc : '';
+  var notePF  = propFirmSel ? 'SI (3 mesi rinnovabili)' : 'NO';
 
-  var sub  = encodeURIComponent('Richiesta Licenza Position Key - ' + nome + ' ' + cognome);
-  var body = encodeURIComponent(
-    'Richiesta Licenza Position Key\n==============================\n' +
-    'Nome:        ' + nome    + '\n' +
-    'Cognome:     ' + cognome + '\n' +
-    'Piattaforma: ' + piat    + '\n' +
-    'Versione:    ' + ver     + '\n' +
-    'Account:     ' + acc     + '\n' +
-    'Pagamento:   ' + pagamento.val + noteU + notePF + '\n' +
-    '==============================\nInviato dal sito Position Key'
-  );
-
-  window.location.href = 'mailto:helppositionkey@proton.me?subject=' + sub + '&body=' + body;
-
-  setTimeout(function(){
-    document.getElementById('formWrap').classList.add('hide');
-    document.getElementById('successBox').classList.add('show');
+  fetch('https://formspree.io/f/xwvrdgjk', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({
+      '_subject':         'Richiesta Licenza — ' + nome + ' ' + cognome,
+      'Nome':             nome,
+      'Cognome':          cognome,
+      'Piattaforma':      piat,
+      'Versione':         ver,
+      'Account Trading':  acc,
+      'Metodo Pagamento': pagamento.val + noteU,
+      'Licenza PropFirm': notePF
+    })
+  })
+  .then(function(res){
     btn.classList.remove('loading'); btn.disabled = false;
-  }, 900);
+    if (res.ok) {
+      document.getElementById('formWrap').classList.add('hide');
+      document.getElementById('successBox').classList.add('show');
+    } else {
+      alert('Errore nell\'invio. Riprova o contatta helppositionkey@proton.me');
+    }
+  })
+  .catch(function(){
+    btn.classList.remove('loading'); btn.disabled = false;
+    alert('Errore di connessione. Controlla la tua rete e riprova.');
+  });
 };
 </script>
 </body>

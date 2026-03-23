@@ -110,7 +110,7 @@ body{
     <div class="success-title">Messaggio Inviato!</div>
     <p class="success-text">
       Il tuo messaggio &egrave; stato inviato a<br>
-      <span class="success-email">helppositionkey@proton.me</span><br><br>
+      <span class="success-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e58d808995958a968c918c8a8b8e809ca595978a918a8bcb8880">[email&#160;protected]</a></span><br><br>
       Ti risponderemo il prima possibile.
     </p>
     <a href="index.html" class="btn-back">Torna alla Home</a>
@@ -155,7 +155,7 @@ body{
       </button>
 
       <div class="disclaimer">
-        Inviando il modulo accetti di essere contattato a helppositionkey@proton.me
+        Inviando il modulo accetti di essere contattato a <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="85ede0e9f5f5eaf6ecf1eceaebeee0fcc5f5f7eaf1eaebabe8e0">[email&#160;protected]</a>
       </div>
 
     </div>
@@ -163,7 +163,7 @@ body{
 
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 function req(id, eid){
   var el = document.getElementById(id), er = document.getElementById(eid);
   if (!el.value.trim()){ el.classList.add('error'); er.classList.add('show'); return false; }
@@ -203,10 +203,32 @@ document.getElementById('btnInvia').addEventListener('click', function(){
   var email   = document.getElementById('cEmail').value.trim();
   var msg     = document.getElementById('cMsg').value.trim();
 
-  var sub  = encodeURIComponent('Messaggio da ' + nome + ' ' + cognome + ' - Position Key');
-  var body = encodeURIComponent(
-    'Mittente: ' + nome + ' ' + cognome + '\n' +
-    'Email:    ' + email + '\n' +
-    '==============================\n\n' +
-    msg + '\n\n' +
-    '==============================\nInviato dal sito Posi
+  fetch('https://formspree.io/f/xnjgkeyp', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({
+      '_subject':  'Messaggio da ' + nome + ' ' + cognome + ' — Position Key',
+      '_replyto':  email,
+      'Nome':      nome,
+      'Cognome':   cognome,
+      'Email':     email,
+      'Messaggio': msg
+    })
+  })
+  .then(function(res){
+    btn.classList.remove('loading'); btn.disabled = false;
+    if (res.ok) {
+      document.getElementById('formWrap').classList.add('hide');
+      document.getElementById('successBox').classList.add('show');
+    } else {
+      alert('Errore nell\'invio. Riprova o contatta helppositionkey@proton.me');
+    }
+  })
+  .catch(function(){
+    btn.classList.remove('loading'); btn.disabled = false;
+    alert('Errore di connessione. Controlla la tua rete e riprova.');
+  });
+});
+</script>
+</body>
+</html>
