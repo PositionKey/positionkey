@@ -121,6 +121,21 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 48px;display:fl
 .btn-back-link:hover{border-color:var(--gold2);color:var(--gold2);}
 .form-wrap.hide{display:none;}
 
+/* CONSENT CHECKBOXES */
+.consent-block{display:flex;flex-direction:column;gap:12px;padding:16px;background:rgba(124,58,237,.05);border:1px solid rgba(124,58,237,.15);border-radius:6px;}
+.consent-row{display:flex;align-items:flex-start;gap:12px;cursor:pointer;user-select:none;}
+.consent-row input[type="checkbox"]{display:none;}
+.consent-box{width:20px;height:20px;min-width:20px;border-radius:4px;border:2px solid rgba(124,58,237,.45);background:var(--night3);display:flex;align-items:center;justify-content:center;transition:all .2s;margin-top:1px;}
+.consent-row.checked .consent-box{background:var(--violet);border-color:var(--violet2);}
+.consent-check-icon{color:white;font-size:13px;font-weight:700;display:none;}
+.consent-row.checked .consent-check-icon{display:block;}
+.consent-text{font-size:13px;color:var(--muted);line-height:1.6;}
+.consent-text a{color:var(--violet3);text-decoration:underline;text-underline-offset:2px;}
+.consent-text a:hover{color:var(--off-white);}
+.consent-error{font-size:11px;color:#F87171;display:none;margin-top:2px;padding-left:32px;}
+.consent-error.show{display:block;}
+.consent-row.has-error .consent-box{border-color:#F87171;}
+
 /* FOOTER */
 footer{background:var(--night);border-top:1px solid var(--border);padding:28px 48px;position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
 .footer-brand{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:3px;color:var(--off-white);}
@@ -277,6 +292,30 @@ footer{background:var(--night);border-top:1px solid var(--border);padding:28px 4
           </div>
         </div>
 
+      <!-- CONSENSI OBBLIGATORI -->
+      <div class="consent-block">
+        <div>
+          <div class="consent-row" id="rowTermini" onclick="toggleConsent('chkTermini','rowTermini','eTermini')">
+            <input type="checkbox" id="chkTermini">
+            <div class="consent-box"><span class="consent-check-icon">&#10003;</span></div>
+            <span class="consent-text">
+              Ho letto e accetto i <a href="termini.html" target="_blank" onclick="event.stopPropagation()">Termini di Servizio</a> di Position Key, incluse le clausole di esclusione di responsabilità relative all'operatività di trading. <span style="color:var(--violet3);">*</span>
+            </span>
+          </div>
+          <div class="consent-error" id="eTermini">Devi accettare i Termini di Servizio per procedere</div>
+        </div>
+        <div>
+          <div class="consent-row" id="rowPrivacy" onclick="toggleConsent('chkPrivacy','rowPrivacy','ePrivacy')">
+            <input type="checkbox" id="chkPrivacy">
+            <div class="consent-box"><span class="consent-check-icon">&#10003;</span></div>
+            <span class="consent-text">
+              Ho letto e accetto la <a href="privacy.html" target="_blank" onclick="event.stopPropagation()">Privacy Policy</a> e acconsento al trattamento dei miei dati personali (nome, email, numero account) per la gestione della licenza. <span style="color:var(--violet3);">*</span>
+            </span>
+          </div>
+          <div class="consent-error" id="ePrivacy">Devi accettare la Privacy Policy per procedere</div>
+        </div>
+      </div>
+
         <!-- SUBMIT -->
         <button class="btn-submit" id="btnInvia">
           <span class="btn-text">Invia Richiesta →</span>
@@ -306,6 +345,22 @@ footer{background:var(--night);border-top:1px solid var(--border);padding:28px 4
 
 <script>
 var licenza = null;
+function toggleConsent(chkId, rowId, errId) {
+  var chk = document.getElementById(chkId);
+  var row = document.getElementById(rowId);
+  var err = document.getElementById(errId);
+  chk.checked = !chk.checked;
+  row.classList.toggle('checked', chk.checked);
+  row.classList.remove('has-error');
+  err.classList.remove('show');
+}
+function reqConsent(chkId, rowId, errId) {
+  var chk = document.getElementById(chkId);
+  var row = document.getElementById(rowId);
+  var err = document.getElementById(errId);
+  if (!chk.checked) { row.classList.add('has-error'); err.classList.add('show'); return false; }
+  row.classList.remove('has-error'); err.classList.remove('show'); return true;
+}
 var pagamento = null;
 
 var PREZZI = {
@@ -366,6 +421,8 @@ document.getElementById('btnInvia').onclick = function () {
   ok = reqEmail('fEmail', 'eEmail') && ok;
   ok = req('fAcc', 'eAcc') && ok;
   if (!pagamento) { document.getElementById('ePag').classList.add('show'); ok = false; }
+  ok = reqConsent('chkTermini','rowTermini','eTermini') && ok;
+  ok = reqConsent('chkPrivacy','rowPrivacy','ePrivacy') && ok;
   if (!ok) {
     var fe = document.querySelector('.lic-card.selected') ? document.querySelector('.form-input.error') : document.getElementById('lic3mesi');
     if (fe) fe.scrollIntoView({ behavior: 'smooth', block: 'center' });
