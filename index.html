@@ -246,19 +246,19 @@ section{padding:100px 48px;position:relative;z-index:1;}
 
 
 /* PROPFIRM SECTION */
-.propfirm-section{background:var(--night);overflow:hidden;}
-.propfirm-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 50% at 50% 100%,rgba(74,222,128,.05) 0%,transparent 70%);pointer-events:none;}
-.propfirm-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
-.propfirm-badge-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px;}
-.firm-badge{display:inline-flex;align-items:center;gap:8px;background:var(--night2);border:1px solid var(--border);border-radius:6px;padding:10px 16px;font-size:13px;color:var(--off-white);font-weight:500;}
+
+
+
+
+
 .firm-badge::before{content:'✓';color:var(--green);font-size:12px;}
-.propfirm-card{background:var(--night2);border:1px solid rgba(74,222,128,.2);border-radius:12px;padding:36px;}
-.propfirm-card-price{display:flex;align-items:baseline;gap:8px;margin:16px 0;}
-.propfirm-card-price .p-val{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--green);line-height:1;}
-.propfirm-card-price .p-alt{font-family:'Space Mono',monospace;font-size:12px;color:var(--muted);}
-.propfirm-card-features{display:flex;flex-direction:column;gap:10px;margin-top:16px;}
-.propfirm-card-features li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);list-style:none;}
-.propfirm-card-features li::before{content:'✓';color:var(--green);flex-shrink:0;}
+
+
+
+
+
+
+
 
 /* SETUP */
 .setup-section{background:var(--night2);}
@@ -319,7 +319,7 @@ footer{background:var(--night);border-top:1px solid var(--border);padding:48px 4
   .hero-chart-wrap{display:none;}.hero-inner{padding:0 20px;}.hero-content{max-width:100%;padding:120px 0 180px;}
   .hero-stats{flex-wrap:wrap;}
   .hero-stat{min-width:50%;border-right:none;border-bottom:1px solid var(--border);}
-  .problem-grid,.features-grid,.versions-grid,.plus-grid,.propfirm-inner,.emotivity-inner{grid-template-columns:1fr;}
+  .problem-grid,.features-grid,.versions-grid,.plus-grid,.emotivity-inner{grid-template-columns:1fr;}
   .setup-grid{grid-template-columns:1fr;}
   .setup-grid::before{display:none;}
   .footer-inner{flex-direction:column;}
@@ -619,11 +619,6 @@ footer{background:var(--night);border-top:1px solid var(--border);padding:48px 4
     </div>
     <div class="demo-stats-row reveal">
       <div class="demo-stat">
-        <div class="d-val"><span style="color:var(--gold2)">da 15€</span></div>
-        <div class="d-lbl">Prezzo di Accesso</div>
-      </div>
-      <div class="demo-divider"></div>
-      <div class="demo-stat">
         <div class="d-val">24h</div>
         <div class="d-lbl">Consegna Licenza</div>
       </div>
@@ -648,38 +643,6 @@ footer{background:var(--night);border-top:1px solid var(--border);padding:48px 4
 <!-- CONFRONTO -->
 
 <!-- PROPFIRM -->
-<section class="propfirm-section">
-  <div class="propfirm-inner">
-    <div>
-      <div class="section-label reveal-left">PropFirm Ready</div>
-      <h2 class="section-title reveal-left">Funziona con i<br>fondi <em>PropFirm</em></h2>
-      <p class="section-sub reveal-left">Licenza aggiuntiva disponibile per account PropFirm. Valida 3 mesi, rinnovabile gratuitamente per altri 3.</p>
-      <div class="propfirm-badge-row reveal-left">
-        <span class="firm-badge">FTMO</span>
-        <span class="firm-badge">The Funded Trader</span>
-        <span class="firm-badge">MyForexFunds</span>
-        <span class="firm-badge">E8 Funding</span>
-        <span class="firm-badge">Qualsiasi PropFirm MT5</span>
-      </div>
-    </div>
-    <div class="propfirm-card reveal-right">
-      <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);">Licenza Aggiuntiva</div>
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;margin-top:8px;">PropFirm Add-on</div>
-      <div class="propfirm-card-price">
-        <div class="p-val">20</div>
-        <div class="p-alt">USDT &nbsp;/&nbsp; 30 EUR</div>
-      </div>
-      <ul class="propfirm-card-features">
-        <li>Integrabile con Position Key</li>
-        <li>Licenza valida 3 mesi</li>
-        <li>Rinnovo gratuito per altri 3 mesi</li>
-        <li>Legata all'account PropFirm specifico</li>
-        <li>Inclusa nella richiesta di accesso</li>
-      </ul>
-      <a href="richiedi.html" style="display:inline-block;margin-top:20px;" class="btn-outline">Aggiungi al tuo ordine →</a>
-    </div>
-  </div>
-</section>
 
 <!-- SETUP -->
 <section class="setup-section" id="setup">
@@ -803,6 +766,21 @@ var counterObserver = new IntersectionObserver(function(entries){
   });
 }, {threshold:0.5});
 document.querySelectorAll('.counter').forEach(function(el){ counterObserver.observe(el); });
+
+// VIDEO PLAYER
+function startVideo(){
+  var v = document.getElementById('demoVideo');
+  var o = document.getElementById('videoOverlay');
+  if(!v) return;
+  o.classList.add('hidden');
+  v.play().catch(function(){});
+}
+// Mostra overlay su pausa/fine
+var dv = document.getElementById('demoVideo');
+if(dv){
+  dv.addEventListener('pause', function(){ document.getElementById('videoOverlay').classList.remove('hidden'); });
+  dv.addEventListener('ended', function(){ document.getElementById('videoOverlay').classList.remove('hidden'); });
+}
 
 
 </script>
