@@ -333,6 +333,63 @@ footer{background:var(--night);border-top:1px solid var(--border);padding:48px 4
   .hero-cta-group{flex-direction:column;align-items:flex-start;}
   .hero-stat{min-width:100%;}
 }
+
+/* ═══════════════════════════════════════════
+   STATS & MONTECARLO SECTION
+═══════════════════════════════════════════ */
+.stats-section{background:var(--night);padding:100px 0;}
+.stats-intro{text-align:center;margin-bottom:72px;}
+.stats-intro .section-label{margin:0 auto 16px;}
+.stats-headline{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,6vw,76px);line-height:1;color:#fff;margin:0 0 20px;}
+.stats-headline span{color:var(--gold);}
+.stats-sub{font-size:18px;color:rgba(255,255,255,.55);max-width:640px;margin:0 auto;}
+
+/* Stat cards grid */
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:0 auto 64px;}
+.stat-card{background:var(--night2);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:28px 24px;position:relative;overflow:hidden;transition:transform .3s,border-color .3s;}
+.stat-card:hover{transform:translateY(-4px);border-color:rgba(124,58,237,.4);}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--violet),transparent);opacity:0;transition:opacity .3s;}
+.stat-card:hover::before{opacity:1;}
+.stat-card-cat{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--violet);margin-bottom:20px;}
+.stat-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.06);}
+.stat-row:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none;}
+.stat-name{font-size:13px;color:rgba(255,255,255,.5);}
+.stat-val{font-family:'Space Mono',monospace;font-size:16px;color:#fff;font-weight:700;}
+.stat-val.pos{color:#4ADE80;}
+.stat-val.neg{color:#F87171;}
+.stat-val.gold{color:var(--gold);}
+
+/* Montecarlo hero card */
+.montecarlo-card{grid-column:1/-1;background:linear-gradient(135deg,rgba(200,146,42,.12) 0%,rgba(200,146,42,.04) 100%);border:1px solid rgba(200,146,42,.35);border-radius:20px;padding:40px 48px;display:flex;align-items:center;gap:48px;position:relative;overflow:hidden;}
+.montecarlo-card::after{content:'';position:absolute;top:-60px;right:-60px;width:240px;height:240px;background:radial-gradient(circle,rgba(200,146,42,.15) 0%,transparent 70%);pointer-events:none;}
+.montecarlo-badge{background:var(--gold);color:#000;font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:2px;padding:4px 12px;border-radius:4px;margin-bottom:12px;display:inline-block;}
+.montecarlo-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,4vw,52px);color:#fff;line-height:1.05;margin:0 0 12px;}
+.montecarlo-title em{color:var(--gold);font-style:normal;}
+.montecarlo-desc{font-size:15px;color:rgba(255,255,255,.6);line-height:1.7;max-width:420px;}
+.montecarlo-right{flex-shrink:0;display:flex;flex-direction:column;gap:16px;min-width:260px;}
+.mc-metric{background:rgba(0,0,0,.3);border-radius:12px;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;}
+.mc-metric-lbl{font-size:12px;color:rgba(255,255,255,.5);}
+.mc-metric-val{font-family:'Space Mono',monospace;font-size:20px;color:var(--gold);font-weight:700;}
+
+/* Stats video player */
+.stats-video-wrap{max-width:900px;margin:64px auto 0;border-radius:16px;overflow:hidden;border:1px solid rgba(200,146,42,.2);box-shadow:0 0 80px rgba(200,146,42,.1);position:relative;}
+.stats-video-wrap video{width:100%;display:block;background:#000;}
+.stats-video-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:linear-gradient(135deg,rgba(8,11,20,.85) 0%,rgba(200,146,42,.12) 100%);cursor:pointer;transition:opacity .3s;}
+.stats-video-overlay.hidden{opacity:0;pointer-events:none;}
+.stats-play-circle{width:80px;height:80px;border-radius:50%;background:rgba(200,146,42,.2);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:28px;color:var(--gold);transition:transform .2s,background .2s;}
+.stats-video-overlay:hover .stats-play-circle{transform:scale(1.1);background:rgba(200,146,42,.35);}
+.stats-play-label{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;color:rgba(255,255,255,.7);}
+
+/* Responsive stats */
+@media(max-width:900px){
+  .stats-grid{grid-template-columns:1fr 1fr;}
+  .montecarlo-card{flex-direction:column;gap:32px;}
+  .montecarlo-right{min-width:100%;width:100%;}
+}
+@media(max-width:599px){
+  .stats-grid{grid-template-columns:1fr;}
+  .montecarlo-card{padding:28px 24px;}
+}
 </style>
 </head>
 <body>
@@ -344,6 +401,7 @@ footer{background:var(--night);border-top:1px solid var(--border);padding:48px 4
   </div>
   <div class="nav-links">
     <a href="#features">Funzionalità</a>
+    <a href="#stats">Statistiche</a>
     <a href="#setup">Come Iniziare</a>
     <a href="contatta.html">Contattaci</a>
   </div>
@@ -354,6 +412,7 @@ footer{background:var(--night);border-top:1px solid var(--border);padding:48px 4
 </nav>
 <div class="nav-mobile-menu" id="mobileMenu">
   <a href="#features">Funzionalità</a>
+  <a href="#stats">Statistiche</a>
   <a href="#setup">Come Iniziare</a>
   <a href="contatta.html">Contattaci</a>
   <a href="richiedi.html">→ Richiedi Accesso</a>
@@ -636,6 +695,194 @@ footer{background:var(--night);border-top:1px solid var(--border);padding:48px 4
   </div>
 </section>
 
+
+<!-- STATISTICHE & MONTECARLO -->
+<section class="stats-section" id="stats">
+  <div class="container">
+
+    <!-- Intro -->
+    <div class="stats-intro reveal">
+      <div class="section-label">Dati Esclusivi</div>
+      <h2 class="stats-headline">Le Statistiche che<br><span>trasformano il tuo trading</span></h2>
+      <p class="stats-sub">Position Key registra ogni operazione e ti mostra in tempo reale i numeri che contano — performance, rischio, qualità e molto altro.</p>
+    </div>
+
+    <!-- Stat cards grid -->
+    <div class="stats-grid">
+
+      <!-- Performance -->
+      <div class="stat-card reveal">
+        <div class="stat-card-cat">⚡ Performance</div>
+        <div class="stat-row">
+          <span class="stat-name">R / Giorno medio</span>
+          <span class="stat-val pos">+0.38R</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-name">R Periodo (YTD)</span>
+          <span class="stat-val pos">+7.06R</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-name">Trade Totali</span>
+          <span class="stat-val">47</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-name">TP / BE / SL</span>
+          <span class="stat-val">26 / 8 / 13</span>
+        </div>
+      </div>
+
+      <!-- Rischio & Drawdown -->
+      <div class="stat-card reveal">
+        <div class="stat-card-cat">🛡️ Rischio &amp; Drawdown</div>
+        <div class="stat-row">
+          <span class="stat-name">Max Drawdown</span>
+          <span class="stat-val neg">−9.40R</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-name">SL Consecutivi (max)</span>
+          <span class="stat-val">4</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-name">Recovery Factor</span>
+          <span class="stat-val gold">0.75</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-name">Peggior Settimana</span>
+          <span class="stat-val neg">−3.2R</span>
+        </div>
+      </div>
+
+      <!-- Qualità Esecuzione -->
+      <div class="stat-card reveal">
+        <div class="stat-card-cat">🎯 Qualità Esecuzione</div>
+        <div class="stat-row">
+          <span class="stat-name">Profit Factor</span>
+          <span class="stat-val gold">1.41</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-name">Expectancy</span>
+          <span class="stat-val pos">+0.073R</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-name">R medio su TP</span>
+          <span class="stat-val pos">+1.28R</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-name">R medio su SL</span>
+          <span class="stat-val neg">−1.00R</span>
+        </div>
+      </div>
+
+      <!-- Storico Mensile -->
+      <div class="stat-card reveal">
+        <div class="stat-card-cat">📅 Storico Mensile</div>
+        <div class="stat-row">
+          <span class="stat-name">Gennaio</span>
+          <span class="stat-val pos">+2.31R</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-name">Febbraio</span>
+          <span class="stat-val pos">+1.84R</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-name">Marzo</span>
+          <span class="stat-val pos">+3.12R</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-name">Aprile (in corso)</span>
+          <span class="stat-val pos">+0.89R</span>
+        </div>
+      </div>
+
+      <!-- Top Asset -->
+      <div class="stat-card reveal">
+        <div class="stat-card-cat">🏆 Top Asset</div>
+        <div class="stat-row">
+          <span class="stat-name">#1 &nbsp;GER40</span>
+          <span class="stat-val gold">+3.80R</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-name">#2 &nbsp;EURNZD</span>
+          <span class="stat-val pos">+2.10R</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-name">#3 &nbsp;XAUUSD</span>
+          <span class="stat-val pos">+1.44R</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-name">Asset peggiore</span>
+          <span class="stat-val neg">US30 −1.2R</span>
+        </div>
+      </div>
+
+      <!-- Ratio rapido -->
+      <div class="stat-card reveal">
+        <div class="stat-card-cat">📊 Ratio Rapido</div>
+        <div class="stat-row">
+          <span class="stat-name">Win Rate (TP+BE)</span>
+          <span class="stat-val pos">72.3%</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-name">Win Rate (solo TP)</span>
+          <span class="stat-val pos">55.3%</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-name">BE Rate</span>
+          <span class="stat-val">17.0%</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-name">Loss Rate</span>
+          <span class="stat-val neg">27.7%</span>
+        </div>
+      </div>
+
+      <!-- MONTECARLO HERO CARD — full width -->
+      <div class="montecarlo-card reveal">
+        <div class="montecarlo-left">
+          <div class="montecarlo-badge">ESCLUSIVA MONDIALE</div>
+          <h3 class="montecarlo-title">Analisi<br><em>Montecarlo LIVE</em><br>direttamente a grafico</h3>
+          <p class="montecarlo-desc">
+            Siamo i <strong>primi al mondo</strong> ad offrire un'analisi Montecarlo eseguita in tempo reale direttamente sul grafico MT5 — nessun foglio Excel, nessun software esterno.
+            Con 20 simulazioni simultanee, Position Key calcola la probabilità di drawdown critico
+            e ti dice <em>prima</em> se la tua strategia regge nel tempo.
+          </p>
+        </div>
+        <div class="montecarlo-right">
+          <div class="mc-metric">
+            <span class="mc-metric-lbl">Simulazioni simultanee</span>
+            <span class="mc-metric-val">20</span>
+          </div>
+          <div class="mc-metric">
+            <span class="mc-metric-lbl">Probabilità superamento DD</span>
+            <span class="mc-metric-val">12%</span>
+          </div>
+          <div class="mc-metric">
+            <span class="mc-metric-lbl">Trade proiettati</span>
+            <span class="mc-metric-val">200</span>
+          </div>
+          <div class="mc-metric">
+            <span class="mc-metric-lbl">Calcolo in tempo reale</span>
+            <span class="mc-metric-val">✓ LIVE</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /stats-grid -->
+
+    <!-- Stats video player -->
+    <div class="stats-video-wrap reveal">
+      <video id="statsVideo" preload="none" playsinline controls>
+        <source src="stats.mp4" type="video/mp4">
+      </video>
+      <div class="stats-video-overlay" id="statsOverlay" onclick="startStatsVideo()">
+        <div class="stats-play-circle">▶</div>
+        <div class="stats-play-label">Statistiche in Azione · Position Key v1.10</div>
+      </div>
+    </div>
+
+  </div><!-- /container -->
+</section>
+
 <!-- PLUS FEATURES -->
 
 <!-- VERSIONI -->
@@ -768,6 +1015,13 @@ var counterObserver = new IntersectionObserver(function(entries){
 document.querySelectorAll('.counter').forEach(function(el){ counterObserver.observe(el); });
 
 // VIDEO PLAYER
+function startStatsVideo(){
+  var v=document.getElementById('statsVideo');
+  var o=document.getElementById('statsOverlay');
+  if(!v)return;
+  o.classList.add('hidden');
+  v.play().catch(function(){});
+}
 function startVideo(){
   var v = document.getElementById('demoVideo');
   var o = document.getElementById('videoOverlay');
