@@ -123,14 +123,7 @@ a:hover { text-decoration: underline; }
       <li><strong>Nome del broker</strong> — raccolto ai fini della verifica tecnica della compatibilità</li>
     </ul>
 
-    <h3>2.2 — Dati tecnici raccolti automaticamente dal software</h3>
-    <ul>
-      <li><strong>Fingerprint hardware del PC (HWID)</strong> — hash anonimo dei percorsi di installazione di MetaTrader 5, utilizzato per il sistema di licenza PC-bound. Non consente l'identificazione diretta del dispositivo fisico</li>
-      <li><strong>Statistiche di utilizzo anonime</strong> — dati aggregati sull'attività di trading (saldo, equity, numero operazioni, winrate) trasmessi in forma anonima ai nostri server per scopi di analisi qualitativa del prodotto. Non contengono informazioni identificative personali</li>
-      <li><strong>Dati di sessione del software</strong> — timestamp di attivazione e ultimo accesso, per finalità di gestione della licenza</li>
-    </ul>
-
-    <h3>2.3 — Dati raccolti dal sito web</h3>
+    <h3>2.2 — Dati raccolti dal sito web</h3>
     <p>Il sito web positionkey.com è una pagina statica informativa. Non utilizza cookie di profilazione, sistemi di tracciamento comportamentale o pixel di terze parti. I soli dati tecnici registrati sono quelli standard dei log del server web (indirizzo IP, browser, pagine visitate) conservati automaticamente dall'infrastruttura di hosting per finalità di sicurezza.</p>
   </div>
 
@@ -147,11 +140,7 @@ a:hover { text-decoration: underline; }
     <p><strong style="color:var(--off-white)">Base giuridica:</strong> Legittimo interesse del titolare (art. 6.1.f GDPR) a proteggere il software da usi non autorizzati.<br>
     L'HWID del dispositivo viene registrato per verificare che il software sia utilizzato sul numero massimo di PC previsto dalla licenza acquistata.</p>
 
-    <h3>3.3 — Statistiche di utilizzo anonime</h3>
-    <p><strong style="color:var(--off-white)">Base giuridica:</strong> Legittimo interesse del titolare (art. 6.1.f GDPR) al miglioramento del prodotto.<br>
-    Le statistiche aggregate e anonime vengono utilizzate per monitorare la qualità del software, individuare anomalie e pianificare sviluppi futuri. Non viene effettuata alcuna profilazione individuale.</p>
-
-    <h3>3.4 — Comunicazioni di supporto</h3>
+    <h3>3.3 — Comunicazioni di supporto</h3>
     <p><strong style="color:var(--off-white)">Base giuridica:</strong> Esecuzione di un contratto (art. 6.1.b GDPR).<br>
     L'indirizzo email viene utilizzato per rispondere a richieste di supporto tecnico, inviare aggiornamenti critici della licenza o comunicare modifiche ai Termini di Servizio.</p>
 
@@ -162,14 +151,7 @@ a:hover { text-decoration: underline; }
   <div class="section">
     <div class="section-num">Art. 4</div>
     <h2>Modalità del Trattamento e Misure di Sicurezza</h2>
-    <p>Il trattamento avviene con strumenti informatici e telematici, adottando misure tecniche e organizzative adeguate a garantire un livello di sicurezza proporzionato al rischio, ai sensi dell'art. 32 GDPR. In particolare:</p>
-    <ul>
-      <li>Le comunicazioni tra il software e i server avvengono tramite protocollo <strong>HTTPS</strong> con crittografia TLS</li>
-      <li>Le chiavi di licenza sono generate con algoritmi crittografici (hash djb2 con salt segreto + XOR obfuscation) e non contengono dati personali in chiaro</li>
-      <li>L'HWID memorizzato sui server è un hash irreversibile: non consente di risalire alle specifiche hardware del dispositivo</li>
-      <li>I database sono ospitati su infrastruttura <strong>Supabase</strong> (EU — Frankfurt, Germania) con Row Level Security abilitata</li>
-      <li>L'accesso ai dati amministrativi è protetto da autenticazione e API key riservata</li>
-    </ul>
+    <p>Il trattamento avviene con strumenti informatici e telematici, adottando misure tecniche e organizzative adeguate a garantire un livello di sicurezza proporzionato al rischio, ai sensi dell'art. 32 GDPR.</p>
   </div>
 
   <!-- 5 -->
@@ -179,7 +161,6 @@ a:hover { text-decoration: underline; }
     <p>I dati personali sono conservati per il tempo strettamente necessario alle finalità per cui sono stati raccolti:</p>
     <ul>
       <li><strong>Dati di licenza (nome, email, conto MT5, HWID)</strong> — conservati per tutta la durata della licenza e per i 12 mesi successivi alla sua scadenza o revoca, per consentire la gestione di eventuali contestazioni</li>
-      <li><strong>Statistiche di utilizzo anonime</strong> — conservate per 24 mesi in forma aggregata</li>
       <li><strong>Log del server web</strong> — conservati per un massimo di 90 giorni dall'infrastruttura di hosting</li>
       <li><strong>Email di supporto</strong> — conservate per 12 mesi dall'ultima comunicazione</li>
     </ul>
@@ -192,7 +173,7 @@ a:hover { text-decoration: underline; }
     <h2>Comunicazione e Trasferimento dei Dati</h2>
     <p>I dati personali non vengono venduti, ceduti o comunicati a terzi per finalità commerciali. Possono essere condivisi esclusivamente con:</p>
     <ul>
-      <li><strong>Fornitori di infrastruttura tecnica</strong> (Supabase, operante come Responsabile del Trattamento ai sensi dell'art. 28 GDPR) — per l'hosting del database e l'elaborazione delle richieste di licenza. I dati rimangono all'interno dell'Unione Europea (server EU-Central-1, Francoforte)</li>
+      <li><strong>Fornitori di infrastruttura tecnica</strong> — per l'hosting del database e l'elaborazione delle richieste di licenza. I dati rimangono all'interno dell'Unione Europea (server EU-Central-1, Francoforte)</li>
       <li><strong>Autorità competenti</strong> — nei soli casi previsti dalla legge o su ordine dell'autorità giudiziaria</li>
     </ul>
     <p>Non vengono effettuati trasferimenti di dati verso Paesi terzi al di fuori dello Spazio Economico Europeo.</p>
