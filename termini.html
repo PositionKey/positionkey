@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Termini di Servizio — Position Key</title>
+<meta name="description" content="Termini e Condizioni di utilizzo di Position Key. Software per MetaTrader 5 — non costituisce consulenza finanziaria.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:   #080B14;
+  --night2:  #0D1120;
+  --violet:  #7C3AED;
+  --violet2: #9F67FF;
+  --gold2:   #E6B84A;
+  --off-white:#E8E6F0;
+  --muted:   #8B8FA8;
+  --border:  rgba(124,58,237,.18);
+  --red:     #F87171;
+  --red-bg:  rgba(248,113,113,.08);
+  --red-border: rgba(248,113,113,.25);
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--night); color: var(--off-white); line-height: 1.7; overflow-x: hidden; }
+
+nav { position: sticky; top: 0; z-index: 100; padding: 14px 48px; display: flex; align-items: center; justify-content: space-between; backdrop-filter: blur(16px); background: rgba(8,11,20,.92); border-bottom: 1px solid var(--border); }
+.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; color: var(--off-white); text-decoration: none; }
+.nav-logo span { color: var(--gold2); }
+.nav-back { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color .2s; }
+.nav-back:hover { color: var(--off-white); }
+
+.page-hero { padding: 80px 48px 56px; max-width: 860px; margin: 0 auto; }
+.page-eyebrow { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--violet2); margin-bottom: 16px; }
+.page-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(42px, 6vw, 72px); letter-spacing: 1px; line-height: 1; color: var(--off-white); margin-bottom: 20px; }
+.page-meta { font-size: 13px; color: var(--muted); font-family: 'Space Mono', monospace; letter-spacing: .5px; }
+
+.legal-body { max-width: 860px; margin: 0 auto; padding: 0 48px 100px; }
+.section { margin-bottom: 52px; }
+.section-num { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--violet2); text-transform: uppercase; margin-bottom: 10px; }
+h2 { font-size: 22px; font-weight: 600; color: var(--off-white); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+h3 { font-size: 16px; font-weight: 600; color: var(--off-white); margin: 24px 0 10px; }
+p  { font-size: 15px; color: var(--muted); margin-bottom: 14px; line-height: 1.8; }
+ul { margin: 10px 0 18px 20px; }
+li { font-size: 15px; color: var(--muted); margin-bottom: 8px; line-height: 1.7; }
+li strong { color: var(--off-white); }
+a  { color: var(--violet2); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* DISCLAIMER BOX — critico */
+.disclaimer-box {
+  background: var(--red-bg);
+  border: 1px solid var(--red-border);
+  border-left: 4px solid var(--red);
+  border-radius: 10px;
+  padding: 24px 28px;
+  margin-bottom: 24px;
+}
+.disclaimer-box .disc-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 12px;
+}
+.disclaimer-box p { font-size: 15px; color: var(--off-white); margin-bottom: 10px; }
+.disclaimer-box p:last-child { margin-bottom: 0; }
+
+/* INFO BOX */
+.info-box { background: rgba(124,58,237,.07); border: 1px solid rgba(124,58,237,.25); border-radius: 10px; padding: 20px 24px; margin-bottom: 20px; }
+.info-box p { margin: 0; font-size: 14px; }
+
+.divider { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+
+.footer-mini { background: var(--night2); border-top: 1px solid var(--border); padding: 24px 48px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.footer-mini-copy { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.5px; color: var(--muted); }
+.footer-mini-links { display: flex; gap: 24px; }
+.footer-mini-links a { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1px; color: var(--muted); text-decoration: none; }
+.footer-mini-links a:hover { color: var(--off-white); }
+
+@media(max-width: 700px) {
+  nav { padding: 14px 20px; }
+  .page-hero { padding: 60px 20px 40px; }
+  .legal-body { padding: 0 20px 80px; }
+  .footer-mini { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">POSITION <span>KEY</span></a>
+  <a class="nav-back" href="index.html">← Torna al sito</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-eyebrow">Documento legale</div>
+  <h1 class="page-title">Termini di Servizio</h1>
+  <p class="page-meta">Ultima revisione: 17 aprile 2026 &nbsp;·&nbsp; Versione 1.0 &nbsp;·&nbsp; Applicabile a tutti gli utenti</p>
+</div>
+
+<div class="legal-body">
+
+  <!-- DISCLAIMER PRINCIPALE -->
+  <div class="disclaimer-box">
+    <div class="disc-title">⚠ Avvertenza Importante — Leggere Prima di Continuare</div>
+    <p><strong>Position Key è uno strumento software di gestione visuale per MetaTrader 5. NON è un servizio di consulenza finanziaria, NON fornisce segnali di trading, NON gestisce capitali per conto di terzi e NON garantisce risultati economici di alcun tipo.</strong></p>
+    <p>Il trading su strumenti finanziari — inclusi forex, CFD, derivati, criptovalute e materie prime — comporta un rischio elevato di perdita parziale o totale del capitale investito. L'utilizzo di Position Key non riduce, elimina o mitiga tale rischio.</p>
+    <p>Utilizzando Position Key, l'utente riconosce di operare esclusivamente sotto la propria responsabilità e di non poter avanzare alcuna pretesa nei confronti di Position Key per perdite derivanti dall'attività di trading.</p>
+  </div>
+
+  <div class="info-box">
+    <p>L'accettazione dei presenti Termini di Servizio avviene al momento dell'attivazione della licenza software o dell'utilizzo di qualsiasi servizio offerto da Position Key. Se non accetti questi termini, non sei autorizzato a utilizzare il software.</p>
+  </div>
+
+  <!-- 1 -->
+  <div class="section">
+    <div class="section-num">Art. 1</div>
+    <h2>Definizioni</h2>
+    <p>Ai fini dei presenti Termini di Servizio si intende per:</p>
+    <ul>
+      <li><strong>"Position Key"</strong> — il software Expert Advisor per MetaTrader 5 e tutti i servizi ad esso collegati (sito web, sistema di licenze, dashboard)</li>
+      <li><strong>"Fornitore"</strong> — il soggetto che sviluppa e distribuisce Position Key, raggiungibile all'indirizzo helppositionkey@proton.me</li>
+      <li><strong>"Utente" / "Licenziatario"</strong> — qualsiasi persona fisica o giuridica che acquista, attiva o utilizza Position Key</li>
+      <li><strong>"Licenza"</strong> — l'autorizzazione non esclusiva, non trasferibile, a utilizzare il software nei limiti stabiliti dal piano acquistato</li>
+      <li><strong>"Attività di trading"</strong> — qualsiasi operazione di acquisto, vendita o gestione di strumenti finanziari eseguita attraverso piattaforme di terze parti (es. MetaTrader 5) mentre Position Key è attivo</li>
+    </ul>
+  </div>
+
+  <!-- 2 -->
+  <div class="section">
+    <div class="section-num">Art. 2</div>
+    <h2>Natura del Software — Cosa Non È Position Key</h2>
+
+    <div class="disclaimer-box">
+      <div class="disc-title">Dichiarazione Esplicita di Non-Consulenza</div>
+      <p>Position Key è un pannello di interfaccia grafica per MetaTrader 5. Nessuna funzionalità del software — incluse quelle di gestione del rischio, controllo emotivo o automazione parziale — costituisce consulenza finanziaria, consiglio di investimento, segnale di trading o raccomandazione operativa di alcun tipo.</p>
+    </div>
+
+    <p>In particolare, Position Key:</p>
+    <ul>
+      <li><strong>NON è un consulente finanziario autorizzato</strong> e non opera sotto alcuna licenza o autorizzazione di natura finanziaria (MiFID II, TUF, Consob o equivalenti)</li>
+      <li><strong>NON fornisce previsioni</strong> sull'andamento dei mercati finanziari</li>
+      <li><strong>NON garantisce performance</strong>, rendimenti, percentuali di successo o risultati economici di alcun tipo, né passati né futuri</li>
+      <li><strong>NON gestisce</strong>, custodisce o movimenta capitali per conto dell'utente</li>
+      <li><strong>NON esegue operazioni automaticamente</strong> senza il consenso esplicito dell'utente per ogni singola operazione (fatta eccezione per le funzioni di automazione parziale del rischio, configurate dall'utente stesso)</li>
+      <li><strong>NON si sostituisce</strong> alla valutazione personale dell'utente in merito all'opportunità di aprire, chiudere o modificare posizioni di trading</li>
+    </ul>
+    <p>Qualsiasi decisione operativa rimane di esclusiva competenza e responsabilità dell'utente.</p>
+  </div>
+
+  <!-- 3 -->
+  <div class="section">
+    <div class="section-num">Art. 3</div>
+    <h2>Rischi del Trading — Avvertenze Obbligatorie</h2>
+    <p>L'utente dichiara di essere consapevole che:</p>
+    <ul>
+      <li>Il <strong>trading su forex, CFD e derivati</strong> è un'attività ad alto rischio speculativo che può comportare la <strong>perdita totale o parziale del capitale impiegato</strong></li>
+      <li>I mercati finanziari sono influenzati da fattori imprevedibili (eventi macroeconomici, politici, geopolitici, tecnici) che nessuno strumento software è in grado di anticipare con certezza</li>
+      <li>Le performance passate del proprio trading, con o senza Position Key, <strong>non sono indicative di risultati futuri</strong></li>
+      <li>L'utilizzo di leva finanziaria amplifica sia i guadagni potenziali che le perdite potenziali, aumentando il rischio complessivo dell'operatività</li>
+      <li>I prodotti CFD e derivati sono strumenti complessi non adatti a tutti gli investitori: prima di operare è necessario valutare attentamente la propria situazione finanziaria, esperienza e propensione al rischio</li>
+      <li>Position Key è uno strumento di supporto operativo: la sua efficacia dipende interamente dalle competenze, dalla disciplina e dalle decisioni dell'utente che lo utilizza</li>
+    </ul>
+    <p>Il Fornitore <strong>non si assume alcuna responsabilità</strong> per le perdite finanziarie, i mancati guadagni o qualsiasi danno economico derivante dall'utilizzo del software o dall'attività di trading svolta dall'utente.</p>
+  </div>
+
+  <!-- 4 -->
+  <div class="section">
+    <div class="section-num">Art. 4</div>
+    <h2>Licenza d'Uso</h2>
+    <h3>4.1 — Concessione della licenza</h3>
+    <p>A fronte del pagamento del corrispettivo pattuito e dell'accettazione dei presenti Termini, il Fornitore concede all'utente una licenza <strong>non esclusiva, personale e non trasferibile</strong> a utilizzare Position Key per i propri scopi di trading personale o professionale, nei limiti stabiliti dal piano acquistato.</p>
+
+    <h3>4.2 — Restrizioni d'uso</h3>
+    <p>L'utente non è autorizzato a:</p>
+    <ul>
+      <li>Copiare, distribuire, rivendere o sublicenziare il software o la chiave di licenza a terzi</li>
+      <li>Effettuare operazioni di reverse engineering, decompilazione o disassemblaggio del codice compilato</li>
+      <li>Modificare, adattare o creare opere derivate del software senza autorizzazione scritta</li>
+      <li>Utilizzare il software per finalità illegali o contrarie all'ordine pubblico</li>
+      <li>Tentare di aggirare il sistema di licenza, di generare chiavi non autorizzate o di clonare il profilo hardware per eludere i limiti della propria licenza</li>
+      <li>Condividere la propria licenza con terzi o utilizzarla su un numero di dispositivi superiore a quanto previsto dal piano acquistato</li>
+    </ul>
+
+    <h3>4.3 — Limite di dispositivi e tracking PC</h3>
+    <p>A seconda del piano acquistato, la licenza può essere associata a un numero limitato di installazioni su dispositivi distinti. Il software rileva automaticamente il dispositivo in uso tramite un identificativo hardware anonimo (HWID). Il superamento del numero di dispositivi consentito comporta il blocco automatico e permanente della licenza su tutti i dispositivi. Per ripristinarla è necessario contattare il supporto.</p>
+
+    <h3>4.4 — Revoca della licenza</h3>
+    <p>Il Fornitore si riserva il diritto di revocare la licenza, senza rimborso, in caso di violazione dei presenti Termini di Servizio, utilizzo fraudolento o abuso del sistema di licenza.</p>
+  </div>
+
+  <!-- 5 -->
+  <div class="section">
+    <div class="section-num">Art. 5</div>
+    <h2>Esclusione di Garanzie</h2>
+
+    <div class="disclaimer-box">
+      <div class="disc-title">⚠ Il Software è Fornito "Com'è"</div>
+      <p>Position Key viene fornito nella forma in cui si trova ("as is" e "as available"), senza garanzie di alcun tipo, esplicite o implicite, incluse — ma non limitate a — le garanzie di commerciabilità, idoneità a uno scopo specifico e non violazione di diritti di terzi.</p>
+    </div>
+
+    <p>In particolare, il Fornitore non garantisce che:</p>
+    <ul>
+      <li>Il software sia privo di errori, bug o interruzioni di funzionamento</li>
+      <li>Il software sia sempre disponibile e accessibile senza interruzioni</li>
+      <li>Il software sia compatibile con future versioni di MetaTrader 5 o con qualsiasi broker specifico</li>
+      <li>Le funzionalità di gestione del rischio e controllo emotivo producano risultati di trading positivi</li>
+      <li>I dati mostrati nel pannello (saldo, equity, statistiche) siano sempre aggiornati in tempo reale senza ritardi o discrepanze</li>
+    </ul>
+    <p>L'utente accetta l'utilizzo del software consapevole di questi limiti e rinuncia a qualsiasi pretesa derivante da difetti tecnici del software, purché il Fornitore abbia adottato misure ragionevoli per il suo corretto funzionamento.</p>
+  </div>
+
+  <!-- 6 -->
+  <div class="section">
+    <div class="section-num">Art. 6</div>
+    <h2>Limitazione di Responsabilità</h2>
+
+    <div class="disclaimer-box">
+      <div class="disc-title">⚠ Esclusione Totale di Responsabilità Operativa e Finanziaria</div>
+      <p>Nella misura massima consentita dalla legge applicabile, il Fornitore <strong>non è in alcun caso responsabile</strong> per danni diretti, indiretti, incidentali, speciali, consequenziali o punitivi, inclusi — a titolo esemplificativo e non esaustivo:</p>
+    </div>
+
+    <ul>
+      <li><strong>Perdite finanziarie di qualsiasi entità</strong> derivanti dall'attività di trading svolta dall'utente mentre il software è in uso, indipendentemente dal fatto che tali perdite siano state influenzate da funzionalità del software</li>
+      <li><strong>Mancati guadagni o opportunità perse</strong> dovute a malfunzionamenti, interruzioni o ritardi del software</li>
+      <li><strong>Danni causati da ordini eseguiti o non eseguiti</strong> dalla piattaforma MetaTrader 5 in conseguenza dell'utilizzo di Position Key</li>
+      <li><strong>Danni causati da errori di configurazione</strong> da parte dell'utente nei parametri di rischio o nelle funzionalità di automazione</li>
+      <li><strong>Perdite derivanti da eventi di mercato straordinari</strong> (slippage, gap, liquidità insufficiente, dichiarazioni di insolvenza del broker) che si verifichino durante l'utilizzo del software</li>
+      <li><strong>Perdita di dati, corruzione di file o danni al sistema informatico</strong> dell'utente</li>
+      <li><strong>Danni derivanti da accessi non autorizzati</strong> alla piattaforma MetaTrader 5 o al conto di trading dell'utente</li>
+      <li><strong>Qualsiasi danno causato dal broker</strong>, dalla piattaforma MetaTrader 5 o da servizi di terze parti integrati nel flusso operativo dell'utente</li>
+    </ul>
+
+    <p>Laddove la legge applicabile non consenta l'esclusione totale di responsabilità, la responsabilità complessiva del Fornitore nei confronti dell'utente è in ogni caso limitata all'importo pagato per la licenza nei 12 mesi precedenti al verificarsi del danno.</p>
+  </div>
+
+  <!-- 7 -->
+  <div class="section">
+    <div class="section-num">Art. 7</div>
+    <h2>Obblighi e Responsabilità dell'Utente</h2>
+    <p>L'utente si impegna a:</p>
+    <ul>
+      <li>Verificare autonomamente l'adeguatezza di Position Key rispetto al proprio profilo di rischio, esperienza e obiettivi finanziari</li>
+      <li>Non utilizzare il software come unico strumento decisionale per le proprie operazioni di trading</li>
+      <li>Controllare sempre manualmente le operazioni aperte e i parametri di rischio impostati nel software</li>
+      <li>Formarsi adeguatamente sull'utilizzo del software prima di impiegarlo in condizioni di mercato reali</li>
+      <li>Mantenere riservate le proprie credenziali di accesso e la chiave di licenza</li>
+      <li>Notificare tempestivamente al supporto qualsiasi anomalia tecnica rilevata</li>
+      <li>Utilizzare il software esclusivamente su conti di trading di cui è il titolare autorizzato</li>
+    </ul>
+  </div>
+
+  <!-- 8 -->
+  <div class="section">
+    <div class="section-num">Art. 8</div>
+    <h2>Pagamenti, Rimborsi e Recesso</h2>
+    <h3>8.1 — Corrispettivo</h3>
+    <p>L'acquisto della licenza avviene tramite le modalità indicate sul sito (USDT, bonifico bancario o altri metodi specificati). Il corrispettivo è dovuto interamente al momento dell'attivazione della licenza.</p>
+
+    <h3>8.2 — Diritto di recesso</h3>
+    <p>In conformità con il D.Lgs. 206/2005 (Codice del Consumo), il consumatore ha diritto di esercitare il recesso entro <strong>14 giorni</strong> dalla ricezione della chiave di licenza, a condizione che la licenza non sia ancora stata attivata. Una volta attivata la licenza sul software, il diritto di recesso decade ai sensi dell'art. 59, lett. (l) del Codice del Consumo, in quanto trattasi di contenuto digitale la cui esecuzione è iniziata con il consenso espresso dell'utente.</p>
+
+    <h3>8.3 — Politica di rimborso</h3>
+    <p>Fatto salvo il diritto di recesso sopra indicato, il Fornitore non è tenuto a effettuare rimborsi per licenze già attivate, incluso il caso in cui l'utente:</p>
+    <ul>
+      <li>Smetta di fare trading o decida di non utilizzare più il software</li>
+      <li>Subisca perdite finanziarie durante l'utilizzo del software</li>
+      <li>Non sia soddisfatto dei risultati del proprio trading</li>
+      <li>Non abbia letto o compreso i presenti Termini di Servizio prima dell'acquisto</li>
+    </ul>
+    <p>In caso di malfunzionamento tecnico grave e documentato del software imputabile al Fornitore, verrà valutata caso per caso la concessione di un periodo di proroga della licenza.</p>
+  </div>
+
+  <!-- 9 -->
+  <div class="section">
+    <div class="section-num">Art. 9</div>
+    <h2>Supporto Tecnico e Aggiornamenti</h2>
+    <p>Il supporto tecnico è disponibile via email a <a href="mailto:helppositionkey@proton.me">helppositionkey@proton.me</a> e tramite i canali Telegram e Discord indicati sul sito. Il Fornitore si impegna a rispondere entro tempi ragionevoli, senza tuttavia garantire tempi di risposta specifici.</p>
+    <p>Gli aggiornamenti del software vengono rilasciati a discrezione del Fornitore. Non è garantita la compatibilità permanente con tutte le versioni future di MetaTrader 5. Il Fornitore non è responsabile per eventuali incompatibilità che dovessero emergere in seguito ad aggiornamenti di MetaTrader 5 o del sistema operativo dell'utente.</p>
+  </div>
+
+  <!-- 10 -->
+  <div class="section">
+    <div class="section-num">Art. 10</div>
+    <h2>Proprietà Intellettuale</h2>
+    <p>Position Key e tutti i suoi componenti (codice sorgente compilato, grafica, documentazione, marchio) sono di proprietà esclusiva del Fornitore e sono protetti dalla normativa vigente in materia di diritto d'autore e proprietà intellettuale.</p>
+    <p>La licenza d'uso non trasferisce all'utente alcun diritto di proprietà sul software o sui relativi componenti. Tutti i diritti non espressamente concessi dalla presente licenza sono riservati al Fornitore.</p>
+  </div>
+
+  <!-- 11 -->
+  <div class="section">
+    <div class="section-num">Art. 11</div>
+    <h2>Privacy e Trattamento dei Dati</h2>
+    <p>Il trattamento dei dati personali dell'utente è disciplinato dalla <a href="privacy.html">Privacy Policy</a> di Position Key, redatta ai sensi del Regolamento UE 2016/679 (GDPR). L'accettazione dei presenti Termini di Servizio implica la presa visione dell'informativa sul trattamento dei dati personali.</p>
+  </div>
+
+  <!-- 12 -->
+  <div class="section">
+    <div class="section-num">Art. 12</div>
+    <h2>Modifiche ai Termini di Servizio</h2>
+    <p>Il Fornitore si riserva il diritto di modificare i presenti Termini in qualsiasi momento. Le modifiche sostanziali saranno comunicate agli utenti con licenza attiva via email con almeno <strong>15 giorni di preavviso</strong>. La versione aggiornata sarà sempre disponibile su questa pagina con indicazione della data di revisione.</p>
+    <p>Continuando a utilizzare Position Key dopo l'entrata in vigore delle modifiche, l'utente ne accetta i contenuti aggiornati. Se non accetti le modifiche, sei tenuto a cessare l'utilizzo del software e a comunicarlo al supporto.</p>
+  </div>
+
+  <!-- 13 -->
+  <div class="section">
+    <div class="section-num">Art. 13</div>
+    <h2>Legge Applicabile e Foro Competente</h2>
+    <p>I presenti Termini di Servizio sono regolati dalla <strong>legge italiana</strong>. Per qualsiasi controversia derivante dall'interpretazione o dall'esecuzione di questi Termini, le parti tenteranno in primo luogo una risoluzione amichevole. In caso di esito negativo, il foro competente esclusivo è quello del <strong>domicilio del Fornitore</strong>, fatto salvo il diritto del consumatore di adire il foro del proprio luogo di residenza ai sensi della normativa consumeristica applicabile.</p>
+    <p>Per le controversie di modesta entità è possibile ricorrere alla procedura di mediazione obbligatoria ai sensi del D.Lgs. 28/2010 prima di adire le vie giudiziarie ordinarie.</p>
+  </div>
+
+  <!-- 14 -->
+  <div class="section">
+    <div class="section-num">Art. 14</div>
+    <h2>Disposizioni Finali</h2>
+    <p>Se una o più clausole dei presenti Termini risultassero nulle o inefficaci ai sensi della legge applicabile, le restanti clausole rimarranno pienamente valide ed efficaci.</p>
+    <p>Il fatto che il Fornitore non eserciti un diritto previsto dai presenti Termini non costituisce rinuncia a tale diritto per il futuro.</p>
+    <p>I presenti Termini, insieme alla Privacy Policy, costituiscono l'intero accordo tra l'utente e il Fornitore in relazione all'utilizzo di Position Key e sostituiscono qualsiasi accordo precedente.</p>
+  </div>
+
+  <hr class="divider">
+
+  <p style="font-size:13px;color:var(--muted);text-align:center;">
+    Per qualsiasi domanda sui presenti Termini: <a href="mailto:helppositionkey@proton.me">helppositionkey@proton.me</a><br>
+    Questi Termini sono redatti in italiano. In caso di discrepanza con versioni tradotte, fa fede il testo italiano.
+  </p>
+
+</div>
+
+<div class="footer-mini">
+  <div class="footer-mini-copy">© 2026 Position Key · Tutti i diritti riservati</div>
+  <div class="footer-mini-links">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="termini.html">Termini di Servizio</a>
+    <a href="index.html">Home</a>
+  </div>
+</div>
+
+</body>
+</html>
