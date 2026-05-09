@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+<script>document.documentElement.classList.add('js');</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Position Key v2 — Mockup Cinematic</title>
+<title>Position Key — Professional Trading Panel per MetaTrader 5</title>
 <meta name="description" content="Il pannello professionale per MetaTrader 5. Esecuzione visuale, controllo del rischio, disciplina automatica.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1369,13 +1370,27 @@ footer{
 }
 
 /* ============================================================
-   REVEAL ANIMATIONS
+   REVEAL ANIMATIONS — fail-safe
+   I .reveal* sono nascosti SOLO se <html> ha la classe `js`,
+   impostata immediatamente da uno <script> nel <head>.
+   Se JS è disabilitato o l'IntersectionObserver fallisce,
+   tutti gli elementi restano completamente visibili.
    ============================================================ */
-.reveal{
+.js .reveal{
   opacity:0;transform:translateY(40px);
   transition:opacity .8s ease, transform .8s ease;
 }
-.reveal.visible{opacity:1;transform:translateY(0);}
+.js .reveal.visible{opacity:1;transform:translateY(0);}
+.js .reveal-left{
+  opacity:0;transform:translateX(-40px);
+  transition:opacity .8s ease, transform .8s ease;
+}
+.js .reveal-left.visible{opacity:1;transform:translateX(0);}
+.js .reveal-right{
+  opacity:0;transform:translateX(40px);
+  transition:opacity .8s ease, transform .8s ease;
+}
+.js .reveal-right.visible{opacity:1;transform:translateX(0);}
 
 /* ============================================================
    RESPONSIVE
@@ -2357,4 +2372,275 @@ img, video, svg{max-width:100%;}
       <div class="setup-step reveal" style="transition-delay:.15s">
         <div class="setup-num">02</div>
         <div class="setup-title">Ricevi la License Key</div>
-        <p class="setup-desc">Entro 24 ore ricevi la
+        <p class="setup-desc">Entro 24 ore ricevi la tua License Key univoca via email, legata esclusivamente al tuo account.</p>
+      </div>
+      <div class="setup-step reveal" style="transition-delay:.3s">
+        <div class="setup-num">03</div>
+        <div class="setup-title">Installa e Trada</div>
+        <p class="setup-desc">Copia il file <code style="font-family:var(--mono);color:var(--gold2);">.ex5</code> negli Expert Advisors di MT5, inserisci la chiave al primo avvio. Pannello attivo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================================================
+     S15 — FAQ (NEW SECTION)
+     =========================================================== -->
+<section class="faq-section full" id="faq" style="padding:120px 48px;">
+  <div style="max-width:900px;margin:0 auto;">
+    <div class="section-label reveal">Domande Frequenti</div>
+    <h2 class="section-title reveal">Tutto quello<br>che vuoi <em>chiedere.</em></h2>
+
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <div class="faq-question">
+          <span class="faq-q-text">Funziona con il mio broker?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">Position Key funziona su qualsiasi broker che supporta MetaTrader 5. Nessuna restrizione su feed dati, simboli o tipologia di conto (hedging o netting).</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">
+          <span class="faq-q-text">È compatibile con account PropFirm?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">Sì. Position Key è specificamente progettato per essere compliance-aware: rispetta i limiti di drawdown giornaliero/totale, le finestre news vietate e i target imposti dalla firm.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">
+          <span class="faq-q-text">Il pannello fa trading automatico?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">No. Position Key è un pannello di esecuzione discrezionale. Tu decidi quando e dove entrare; il pannello rende l'esecuzione disciplinata e impone le regole che hai impostato.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">
+          <span class="faq-q-text">Posso usarlo su più conti?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">Sì. Con una sola licenza puoi gestire <strong>più conti MT5 dallo stesso PC</strong>: live, demo, broker diversi e account PropFirm. La licenza è legata alla tua macchina, non al singolo conto, così puoi operare in parallelo su tutte le installazioni di MetaTrader 5 attive sul tuo computer.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">
+          <span class="faq-q-text">Cosa succede se cambio broker?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">Nessun problema: la licenza è legata al tuo PC, non al broker o al numero di conto. Cambia broker, apri un nuovo account, configura una nuova installazione MT5 — il pannello continuerà a funzionare senza alcun trasferimento di licenza.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">
+          <span class="faq-q-text">La licenza è perpetua o annuale?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">La licenza è una tantum e include tutti gli aggiornamenti minori della versione corrente. I major upgrade futuri saranno offerti agli utenti esistenti a condizioni preferenziali.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">
+          <span class="faq-q-text">Funziona su Mac?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">MetaTrader 5 su Mac ha limitazioni native. Consigliamo l'utilizzo via Windows (anche in macchina virtuale Parallels) o un VPS per garantire piena funzionalità del pannello.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">
+          <span class="faq-q-text">Posso provarlo prima dell'acquisto?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">Trovi i video demo in questa pagina e nel canale supporto. Per richieste di trial dedicato, scrivi a helppositionkey@proton.me.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================================================
+     CTA FINALE
+     =========================================================== -->
+<section class="cta-section full" style="padding:140px 48px;">
+  <div class="cta-inner">
+    <div class="section-label reveal" style="color:var(--gold3);">Inizia Oggi</div>
+    <h2 class="cta-title reveal">Smetti di tradare come un neofita.<br><em>Inizia ad essere un trader professionista.</em></h2>
+    <p class="cta-sub reveal">
+      Niente più calcolatrici per la size del lotto, fogli Excel per il rischio, doppi conti su carta per il take profit. Position Key li elimina tutti.
+      <br><br>
+      <strong style="font-style:normal;color:var(--gold2);">Velocità di esecuzione da sniper</strong>, sizing automatico al pip, stop loss e take profit calcolati e piazzati in due click, gestione automatica del breakeven, scudo news in tempo reale, statistiche di livello istituzionale e analisi Montecarlo.
+      <br><br>
+      Tutto questo — e molto di più — in un unico pannello.
+    </p>
+    <div class="cta-group reveal">
+      <a href="#pricing" class="btn-primary">
+        <span>Ottieni Position Key</span>
+        <span class="arrow">→</span>
+      </a>
+      <a href="contatta.html" class="btn-outline">Hai domande? Scrivici</a>
+    </div>
+    <div class="cta-note reveal">Licenza consegnata entro 24h · Pagamento USDT o Bonifico · Supporto via email</div>
+  </div>
+</section>
+
+<!-- ===========================================================
+     FOOTER
+     =========================================================== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-brand-name">POSITION <span>KEY</span></div>
+      <p class="footer-brand-desc">Il pannello professionale per MetaTrader 5. Controllo del rischio, disciplina automatica, esecuzione professionale.</p>
+      <a href="mailto:helppositionkey@proton.me" style="font-family:var(--mono);font-size:11px;color:var(--muted);text-decoration:none;letter-spacing:.5px;">helppositionkey@proton.me</a>
+    </div>
+    <div class="footer-links">
+      <h4>Prodotto</h4>
+      <a href="#features">Funzionalità</a>
+      <a href="#gallery">Pannello</a>
+      <a href="#pricing">Versioni</a>
+      <a href="#setup">Come Iniziare</a>
+    </div>
+    <div class="footer-links">
+      <h4>Supporto</h4>
+      <a href="#faq">FAQ</a>
+      <a href="contatta.html">Contattaci</a>
+      <a href="mailto:helppositionkey@proton.me">Email Diretto</a>
+    </div>
+    <div class="footer-links">
+      <h4>Legale</h4>
+      <a href="termini.html">Termini</a>
+      <a href="privacy.html">Privacy</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Position Key · v1.10.4</span>
+    <span>Il trading comporta rischi. Position Key non fornisce consulenza finanziaria.</span>
+  </div>
+</footer>
+
+<script>
+// ============================================================
+// Reveal on scroll — con fallback fail-safe
+// Se IntersectionObserver non è supportato o non scatta entro 4s,
+// rendiamo tutto visibile in automatico (zero pagine "vuote").
+// ============================================================
+(function setupReveal(){
+  var sel = '.reveal, .reveal-left, .reveal-right';
+  var els = document.querySelectorAll(sel);
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(function(el){ el.classList.add('visible'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ io.observe(el); });
+  // Safety net dopo 4s — nessun elemento deve restare invisibile
+  setTimeout(function(){
+    document.querySelectorAll(
+      '.reveal:not(.visible), .reveal-left:not(.visible), .reveal-right:not(.visible)'
+    ).forEach(function(el){ el.classList.add('visible'); });
+  }, 4000);
+})();
+
+// ============================================================
+// Nav scrolled
+// ============================================================
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+// ============================================================
+// Gallery — hover-play + click → fullscreen (con audio attivato)
+// ============================================================
+function openVideoFullscreen(video){
+  if(!video) return;
+  // Pausa, attiva audio e parte da capo
+  video.pause();
+  video.currentTime = 0;
+  video.muted = false;
+  video.controls = true;
+  // Cross-browser fullscreen
+  const req = video.requestFullscreen
+            || video.webkitRequestFullscreen
+            || video.webkitEnterFullscreen   /* iOS Safari */
+            || video.msRequestFullscreen;
+  if(req){
+    Promise.resolve(req.call(video)).then(()=>video.play().catch(()=>{}))
+      .catch(()=>{ /* fallback: play inline con audio */ video.play().catch(()=>{}); });
+  } else {
+    video.play().catch(()=>{});
+  }
+}
+// Quando esce dal fullscreen → ripristina mute/loop
+document.addEventListener('fullscreenchange', () => {
+  if(!document.fullscreenElement){
+    document.querySelectorAll('.gallery-tile video').forEach(v => {
+      v.muted = true; v.controls = false; v.currentTime = 0; v.pause();
+    });
+  }
+});
+
+document.querySelectorAll('.gallery-tile').forEach(tile => {
+  const v = tile.querySelector('video');
+  // Hover preview
+  tile.addEventListener('mouseenter', () => { v.play().catch(()=>{}); });
+  tile.addEventListener('mouseleave', () => {
+    if(!document.fullscreenElement){ v.pause(); v.currentTime = 0; }
+  });
+  // Click ovunque sulla tile o sul tasto expand → fullscreen
+  tile.addEventListener('click', (e) => {
+    e.preventDefault();
+    openVideoFullscreen(v);
+  });
+  // Tastiera (Enter / Space) per accessibilità
+  tile.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      openVideoFullscreen(v);
+    }
+  });
+});
+
+// ============================================================
+// FAQ toggle
+// ============================================================
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.addEventListener('click', () => item.classList.toggle('open'));
+});
+// ============================================================
+// POSITION KEY LIVE VIDEO — caption + progress in sync col MP4
+// ============================================================
+(function pkVideoSync(){
+  var video    = document.getElementById('pkVideo');
+  var caption  = document.getElementById('pkCaption');
+  var progress = document.getElementById('pkProgress');
+  if (!video || !caption || !progress) return;
+
+  // 5 scene del MP4 (durata totale ~17.2s; xfade 0.7s tra scene)
+  var SCENES = [
+    { from:0,    to:3.6,  num:'01 / 05', label:'TRADE · ESECUZIONE',           pct:20  },
+    { from:3.6,  to:6.9,  num:'02 / 05', label:'AUTO-BE · PROTEZIONE ATTIVA',  pct:40  },
+    { from:6.9,  to:10.2, num:'03 / 05', label:'OPTIONS · CONFIGURAZIONE',     pct:60  },
+    { from:10.2, to:13.5, num:'04 / 05', label:'STATS · PERFORMANCE',          pct:80  },
+    { from:13.5, to:99,   num:'05 / 05', label:'PLUS · STATISTICHE AVANZATE',  pct:100 }
+  ];
+
+  var lastIdx = -1;
+  video.addEventListener('timeupdate', function(){
+    var t = video.currentTime;
+    var idx = -1;
+    for (var i = 0; i < SCENES.length; i++) {
+      if (t >= SCENES[i].from && t < SCENES[i].to) { idx = i; break; }
+    }
+    if (idx === -1 || idx === lastIdx) return;
+    lastIdx = idx;
+    var s = SCENES[idx];
+    caption.innerHTML = '<span class="num">' + s.num + '</span>' + s.label;
+    progress.style.width = s.pct + '%';
+  });
+})();
+</script>
+
+</body>
+</html>
