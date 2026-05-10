@@ -1575,9 +1575,24 @@ img, video, svg{max-width:100%;}
     padding:15px 18px;font-size:11px;letter-spacing:1.6px;
   }
 
-  /* 7. Hero showcase: full width, nessuna candela */
-  .hero-showcase{width:100%;max-width:100%;margin:0 auto;padding-top:0;}
-  .candle-3d{display:none !important;}
+  /* 7. Hero showcase: full width, candele rimpicciolite */
+  .hero-showcase{width:100%;max-width:100%;margin:0 auto;padding-top:0;padding-bottom:44px;}
+  .candle-3d.bearish{
+    width:54px;
+    top:auto;
+    bottom:-28px;
+    left:8px;
+    transform:rotate(-18deg);
+    filter:drop-shadow(0 16px 22px rgba(0,0,0,.55));
+  }
+  .candle-3d.bullish{
+    width:40px;
+    top:auto;
+    bottom:-36px;
+    right:8px;
+    transform:rotate(14deg);
+    filter:drop-shadow(0 16px 22px rgba(0,0,0,.55));
+  }
 
   /* 8. Hero-stats: STATIC (non più absolute), griglia 2×2 */
   .hero-stats{
@@ -2155,9 +2170,9 @@ img, video, svg{max-width:100%;}
     <p class="section-sub reveal">Cinque registrazioni reali del software in azione. Nessuna animazione finta, nessun mockup ricostruito a posteriori.</p>
 
     <div class="gallery-grid reveal">
-      <div class="gallery-tile" data-title="Operatività e Rischio Controllato" data-src="Video_Cropped/Operatività e Rischio controllato.mp4" tabindex="0">
+      <div class="gallery-tile" data-title="Operatività e Rischio Controllato" data-src="Video_Cropped/Operativit%C3%A0%20e%20Rischio%20controllato.mp4" tabindex="0">
         <video muted loop playsinline preload="metadata">
-          <source src="Video_Cropped/Operatività e Rischio controllato.mp4" type="video/mp4">
+          <source src="Video_Cropped/Operativit%C3%A0%20e%20Rischio%20controllato.mp4" type="video/mp4">
         </video>
         <div class="gallery-tile-overlay"></div>
         <div class="gallery-tile-label">
@@ -2169,9 +2184,9 @@ img, video, svg{max-width:100%;}
         </button>
       </div>
 
-      <div class="gallery-tile" data-title="Gestione Obiettivi" data-src="Video_Cropped/Getione Obbiettivi.mp4" tabindex="0">
+      <div class="gallery-tile" data-title="Gestione Obiettivi" data-src="Video_Cropped/Getione%20Obbiettivi.mp4" tabindex="0">
         <video muted loop playsinline preload="metadata">
-          <source src="Video_Cropped/Getione Obbiettivi.mp4" type="video/mp4">
+          <source src="Video_Cropped/Getione%20Obbiettivi.mp4" type="video/mp4">
         </video>
         <div class="gallery-tile-overlay"></div>
         <div class="gallery-tile-label">
@@ -2183,9 +2198,9 @@ img, video, svg{max-width:100%;}
         </button>
       </div>
 
-      <div class="gallery-tile" data-title="Auto-BE e Rischio" data-src="Video_Cropped/Autobe e Rischio.mp4" tabindex="0">
+      <div class="gallery-tile" data-title="Auto-BE e Rischio" data-src="Video_Cropped/Autobe%20e%20Rischio.mp4" tabindex="0">
         <video muted loop playsinline preload="metadata">
-          <source src="Video_Cropped/Autobe e Rischio.mp4" type="video/mp4">
+          <source src="Video_Cropped/Autobe%20e%20Rischio.mp4" type="video/mp4">
         </video>
         <div class="gallery-tile-overlay"></div>
         <div class="gallery-tile-label">
@@ -2197,9 +2212,9 @@ img, video, svg{max-width:100%;}
         </button>
       </div>
 
-      <div class="gallery-tile" data-title="Tutto Sotto Controllo" data-src="Video_Cropped/Options Tenere sotto controllo tutto.mp4" tabindex="0">
+      <div class="gallery-tile" data-title="Tutto Sotto Controllo" data-src="Video_Cropped/Options%20Tenere%20sotto%20controllo%20tutto.mp4" tabindex="0">
         <video muted loop playsinline preload="metadata">
-          <source src="Video_Cropped/Options Tenere sotto controllo tutto.mp4" type="video/mp4">
+          <source src="Video_Cropped/Options%20Tenere%20sotto%20controllo%20tutto.mp4" type="video/mp4">
         </video>
         <div class="gallery-tile-overlay"></div>
         <div class="gallery-tile-label">
@@ -2211,14 +2226,14 @@ img, video, svg{max-width:100%;}
         </button>
       </div>
 
-      <div class="gallery-tile" data-title="Statistiche Sono Oro" data-src="Video_Cropped/Statistiche sono Oro.mp4" tabindex="0">
+      <div class="gallery-tile" data-title="Analisi Statistiche" data-src="Video_Cropped/Statistiche%20sono%20Oro.mp4" tabindex="0">
         <video muted loop playsinline preload="metadata">
-          <source src="Video_Cropped/Statistiche sono Oro.mp4" type="video/mp4">
+          <source src="Video_Cropped/Statistiche%20sono%20Oro.mp4" type="video/mp4">
         </video>
         <div class="gallery-tile-overlay"></div>
         <div class="gallery-tile-label">
           <span class="gallery-tile-num">05 · Analisi</span>
-          <span class="gallery-tile-title">Statistiche Sono Oro</span>
+          <span class="gallery-tile-title">Analisi Statistiche</span>
         </div>
         <button class="gallery-tile-expand" aria-label="Guarda il video" tabindex="-1">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
@@ -2444,8 +2459,8 @@ img, video, svg{max-width:100%;}
           <div class="pricing-name">POSITION <span class="accent">KEY</span></div>
           <p class="pricing-tagline">Il pannello visuale essenziale per chi esegue con disciplina.</p>
         </div>
-        <div class="pricing-price">
-          <span class="amt" style="color:#4ade80;font-size:56px;">GRATIS</span>
+        <div class="pricing-price" style="flex-direction:column;align-items:flex-start;gap:4px;">
+          <span class="amt" style="color:#4ade80;font-size:52px;">GRATIS</span>
           <span class="unit">contattaci su Telegram per ottenerlo</span>
         </div>
         <div class="pricing-features">
@@ -2787,51 +2802,71 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 // ============================================================
-// Gallery — hover-play preview + click → lightbox modal
+// Gallery — thumbnail seek + hover-play + lightbox modal
 // ============================================================
 (function galleryInit(){
-  const lb       = document.getElementById('videoLightbox');
-  const lbVideo  = document.getElementById('lightboxVideo');
-  const lbClose  = document.getElementById('lightboxClose');
-  const lbTitle  = document.getElementById('lightboxTitle');
+  const lb      = document.getElementById('videoLightbox');
+  const lbVideo = document.getElementById('lightboxVideo');
+  const lbClose = document.getElementById('lightboxClose');
+  const lbTitle = document.getElementById('lightboxTitle');
+  const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
+  /* ── Lightbox ── */
   function openLightbox(src, title){
-    lbVideo.src = src;
     lbTitle.textContent = title || '';
     lb.style.display = 'flex';
     document.body.style.overflow = 'hidden';
+    // Imposta src e avvia
+    lbVideo.src = src;   // già URL-encoded nell'attributo data-src
     lbVideo.currentTime = 0;
-    lbVideo.play().catch(()=>{});
+    lbVideo.muted = false;
+    // play() dopo che il browser ha caricato abbastanza dati
+    lbVideo.addEventListener('canplay', function onCan(){
+      lbVideo.removeEventListener('canplay', onCan);
+      lbVideo.play().catch(()=>{ lbVideo.muted = true; lbVideo.play().catch(()=>{}); });
+    });
+    lbVideo.load();
   }
 
   function closeLightbox(){
     lbVideo.pause();
-    lbVideo.src = '';
+    lbVideo.removeAttribute('src');
+    lbVideo.load();
     lb.style.display = 'none';
     document.body.style.overflow = '';
   }
 
-  // Chiudi con pulsante X
   lbClose.addEventListener('click', closeLightbox);
-  // Chiudi cliccando fuori dal video
-  lb.addEventListener('click', (e) => { if(e.target === lb) closeLightbox(); });
-  // Chiudi con Escape
-  document.addEventListener('keydown', (e) => {
+  lb.addEventListener('click', e => { if(e.target === lb) closeLightbox(); });
+  document.addEventListener('keydown', e => {
     if(e.key === 'Escape' && lb.style.display === 'flex') closeLightbox();
   });
 
+  /* ── Tile: thumbnail + hover/touch ── */
   document.querySelectorAll('.gallery-tile').forEach(tile => {
     const v   = tile.querySelector('video');
     const src = tile.dataset.src;
     const ttl = tile.dataset.title;
 
-    // Hover → anteprima muted nella tile
-    tile.addEventListener('mouseenter', () => { v.play().catch(()=>{}); });
-    tile.addEventListener('mouseleave', () => { v.pause(); v.currentTime = 0; });
+    // Forza il primo frame come thumbnail dopo il caricamento dei metadata
+    v.addEventListener('loadedmetadata', () => {
+      v.currentTime = 0.1;
+    });
+    // Quando seekato, metti in pausa (vogliamo solo il fermo immagine)
+    v.addEventListener('seeked', () => {
+      if(!isTouchDevice) return; // su desktop la pausa è gestita da mouseleave
+      v.pause();
+    });
 
-    // Click → apre lightbox con audio e controlli
+    if(!isTouchDevice){
+      // Desktop: hover → play preview
+      tile.addEventListener('mouseenter', () => { v.play().catch(()=>{}); });
+      tile.addEventListener('mouseleave', () => { v.pause(); v.currentTime = 0.1; });
+    }
+
+    // Click / Tap → lightbox
     tile.addEventListener('click', () => openLightbox(src, ttl));
-    tile.addEventListener('keydown', (e) => {
+    tile.addEventListener('keydown', e => {
       if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openLightbox(src, ttl); }
     });
   });
