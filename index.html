@@ -695,6 +695,95 @@ nav.scrolled{padding:10px 48px;background:rgba(5,8,17,.92);}
 }
 
 /* ============================================================
+   S3-PLUS — HERO LAYOUT CENTRATO + CANDELE 3D CONTESTUALI
+   Override mirato che trasforma la hero da grid 2-colonne
+   a single-column impatto-pieno (stile MagicKeys).
+   Le candele 3D — Marubozu rossa + Bullish Hammer verde —
+   ancorano visivamente il prodotto al concetto di trading.
+   ============================================================ */
+.hero-inner.hero-inner--centered{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:0;
+  grid-template-columns:none;
+}
+.hero-inner--centered .hero-content{
+  align-items:center;
+  width:100%;
+  max-width:1200px;
+  margin-bottom:64px;
+}
+.hero-inner--centered .hero-eyebrow{margin-left:auto;margin-right:auto;}
+.hero-inner--centered .hero-title{
+  text-align:center;
+  margin-left:auto;margin-right:auto;
+  max-width:1280px;
+}
+.hero-inner--centered .hero-quote{margin-left:auto;margin-right:auto;}
+.hero-inner--centered .hero-cta-group{justify-content:center;}
+
+/* SHOWCASE wrapper: pannello reale + candele 3D */
+.hero-showcase{
+  position:relative;
+  width:100%;
+  max-width:1200px;
+  margin:0 auto;
+}
+.hero-showcase .hero-panel-wrap{position:relative;z-index:5;}
+
+/* Candela 3D — base */
+.candle-3d{
+  position:absolute;
+  z-index:8;
+  pointer-events:none;
+  filter:drop-shadow(0 35px 45px rgba(0,0,0,.55));
+}
+/* Marubozu ribassista — più imponente, in alto a sinistra */
+.candle-3d.bearish{
+  width:130px;
+  top:-90px;
+  left:-2%;
+  transform:rotate(-18deg);
+  animation:pkFloatLeft 7s ease-in-out infinite;
+}
+/* Bullish Hammer — più piccola, in alto a destra */
+.candle-3d.bullish{
+  width:95px;
+  top:-110px;
+  right:-1%;
+  transform:rotate(14deg);
+  animation:pkFloatRight 6.2s ease-in-out infinite;
+  animation-delay:-2.5s;
+}
+@keyframes pkFloatLeft{
+  0%,100%{transform:translateY(0) translateX(0) rotate(-18deg);}
+  33%    {transform:translateY(-22px) translateX(-6px) rotate(-22deg);}
+  66%    {transform:translateY(-10px) translateX(4px) rotate(-15deg);}
+}
+@keyframes pkFloatRight{
+  0%,100%{transform:translateY(0) translateX(0) rotate(14deg);}
+  50%    {transform:translateY(-26px) translateX(8px) rotate(18deg);}
+}
+
+/* Responsive: candele più piccole su tablet/mobile */
+@media(max-width:1024px){
+  .candle-3d.bearish{width:95px;top:-60px;left:0;}
+  .candle-3d.bullish{width:75px;top:-80px;right:0;}
+}
+@media(max-width:640px){
+  .candle-3d.bearish{width:70px;top:-40px;left:-10px;}
+  .candle-3d.bullish{width:55px;top:-55px;right:-10px;}
+  .hero-inner--centered .hero-content{margin-bottom:40px;}
+}
+
+/* Riduzione movimento per accessibilità */
+@media (prefers-reduced-motion: reduce){
+  .candle-3d{animation:none !important;}
+}
+
+/* ============================================================
    S4 — MARQUEE
    ============================================================ */
 .marquee-bar{
@@ -1598,7 +1687,7 @@ img, video, svg{max-width:100%;}
   <div class="hero-scrim"></div>
   <div class="hero-bloom"></div>
 
-  <div class="hero-inner">
+  <div class="hero-inner hero-inner--centered">
     <div class="hero-content">
       <div class="hero-eyebrow">
         <span class="live"></span>
@@ -1611,7 +1700,7 @@ img, video, svg{max-width:100%;}
       <p class="hero-quote">
         Mantieni sempre il controllo delle tue emozioni e migliora le tue prestazioni. <strong style="color:var(--gold2);font-style:normal;font-weight:500;">Concentrati sull'efficienza.</strong>
       </p>
-      <p style="font-family:var(--mono);font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:var(--violet3);margin-top:14px;max-width:680px;line-height:1.6;">
+      <p style="font-family:var(--mono);font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:var(--violet3);margin-top:14px;max-width:680px;line-height:1.6;margin-left:auto;margin-right:auto;">
         Calcolatore automatico delle dimensioni del lotto · Con un click visualizzi a grafico il tuo trade.
       </p>
       <div class="hero-cta-group">
@@ -1625,15 +1714,82 @@ img, video, svg{max-width:100%;}
       </div>
     </div>
 
-    <!-- POSITION KEY LIVE PANEL — MP4 reale dai 5 screen del pannello -->
-    <div class="hero-panel-wrap" style="position:relative;">
-      <div class="pk-video-frame">
-        <video autoplay muted loop playsinline preload="metadata" poster="panel_poster.jpg" id="pkVideo">
-          <source src="panel_loop.mp4" type="video/mp4">
-        </video>
+    <!-- HERO SHOWCASE — pannello reale + candele 3D contestualizzate -->
+    <div class="hero-showcase">
+
+      <!-- CANDELA RIBASSISTA — MARUBOZU ROSSA
+           Pattern: corpo dominante, stoppini quasi assenti.
+           Significato grafico: pressione venditrice piena. -->
+      <svg class="candle-3d bearish" viewBox="0 0 120 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="pkRedBody" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%"  stop-color="#7F1D1D"/>
+            <stop offset="35%" stop-color="#DC2626"/>
+            <stop offset="65%" stop-color="#EF4444"/>
+            <stop offset="100%" stop-color="#7F1D1D"/>
+          </linearGradient>
+          <linearGradient id="pkRedTop" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"  stop-color="#F87171"/>
+            <stop offset="100%" stop-color="#DC2626"/>
+          </linearGradient>
+          <linearGradient id="pkWick1" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#1f2937"/>
+            <stop offset="50%" stop-color="#374151"/>
+            <stop offset="100%" stop-color="#0f172a"/>
+          </linearGradient>
+        </defs>
+        <rect x="54" y="0" width="12" height="18" fill="url(#pkWick1)" rx="2"/>
+        <ellipse cx="60" cy="2" rx="6" ry="2" fill="#475569"/>
+        <rect x="20" y="18" width="80" height="270" fill="url(#pkRedBody)" rx="4"/>
+        <ellipse cx="60" cy="18" rx="40" ry="10" fill="url(#pkRedTop)"/>
+        <rect x="28" y="28" width="6" height="250" fill="rgba(255,255,255,.20)" rx="3"/>
+        <rect x="54" y="288" width="12" height="22" fill="url(#pkWick1)" rx="2"/>
+        <ellipse cx="60" cy="316" rx="40" ry="6" fill="rgba(0,0,0,.45)"/>
+      </svg>
+
+      <!-- POSITION KEY LIVE PANEL — MP4 reale dai 5 screen del pannello -->
+      <div class="hero-panel-wrap" style="position:relative;">
+        <div class="pk-video-frame">
+          <video autoplay muted loop playsinline preload="metadata" poster="panel_poster.jpg" id="pkVideo">
+            <source src="panel_loop.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="pk-caption" id="pkCaption"><span class="num">01 / 05</span>TRADE · ESECUZIONE</div>
+        <div class="pk-progress"><div class="pk-progress-fill" id="pkProgress"></div></div>
       </div>
-      <div class="pk-caption" id="pkCaption"><span class="num">01 / 05</span>TRADE · ESECUZIONE</div>
-      <div class="pk-progress"><div class="pk-progress-fill" id="pkProgress"></div></div>
+
+      <!-- CANDELA RIALZISTA — BULLISH HAMMER VERDE
+           Pattern: corpo piccolo in alto + stoppino inferiore lungo.
+           Significato grafico: i venditori spingono giù ma i compratori
+           riportano il prezzo al massimo = inversione rialzista. -->
+      <svg class="candle-3d bullish" viewBox="0 0 120 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="pkGreenBody" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%"  stop-color="#14532D"/>
+            <stop offset="35%" stop-color="#16A34A"/>
+            <stop offset="65%" stop-color="#22C55E"/>
+            <stop offset="100%" stop-color="#14532D"/>
+          </linearGradient>
+          <linearGradient id="pkGreenTop" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"  stop-color="#4ADE80"/>
+            <stop offset="100%" stop-color="#16A34A"/>
+          </linearGradient>
+          <linearGradient id="pkWick2" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#1f2937"/>
+            <stop offset="50%" stop-color="#374151"/>
+            <stop offset="100%" stop-color="#0f172a"/>
+          </linearGradient>
+        </defs>
+        <rect x="54" y="0" width="12" height="14" fill="url(#pkWick2)" rx="2"/>
+        <ellipse cx="60" cy="2" rx="6" ry="2" fill="#4ade80"/>
+        <rect x="20" y="14" width="80" height="80" fill="url(#pkGreenBody)" rx="4"/>
+        <ellipse cx="60" cy="14" rx="40" ry="10" fill="url(#pkGreenTop)"/>
+        <rect x="28" y="22" width="6" height="65" fill="rgba(255,255,255,.22)" rx="3"/>
+        <rect x="54" y="94" width="12" height="210" fill="url(#pkWick2)" rx="2"/>
+        <ellipse cx="60" cy="304" rx="6" ry="2" fill="#374151"/>
+        <ellipse cx="60" cy="316" rx="36" ry="5" fill="rgba(0,0,0,.45)"/>
+      </svg>
+
     </div>
     <!-- LEGACY (HIDDEN) — vecchio pannello HTML/CSS conservato per fallback -->
     <div style="display:none;" aria-hidden="true">
