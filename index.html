@@ -2171,8 +2171,8 @@ img, video, svg{max-width:100%;}
 
     <div class="gallery-grid reveal">
       <div class="gallery-tile" data-title="Operatività e Rischio Controllato" data-src="Video_Cropped/Operativit%C3%A0%20e%20Rischio%20controllato.mp4" tabindex="0">
-        <video muted loop playsinline preload="metadata">
-          <source src="Video_Cropped/Operativit%C3%A0%20e%20Rischio%20controllato.mp4" type="video/mp4">
+        <video muted loop playsinline preload="metadata" poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9' preserveAspectRatio='none'><rect width='16' height='9' fill='%23080b14'/></svg>">
+          <source src="Video_Cropped/Operativit%C3%A0%20e%20Rischio%20controllato.mp4#t=0.5" type="video/mp4">
         </video>
         <div class="gallery-tile-overlay"></div>
         <div class="gallery-tile-label">
@@ -2185,8 +2185,8 @@ img, video, svg{max-width:100%;}
       </div>
 
       <div class="gallery-tile" data-title="Gestione Obiettivi" data-src="Video_Cropped/Getione%20Obbiettivi.mp4" tabindex="0">
-        <video muted loop playsinline preload="metadata">
-          <source src="Video_Cropped/Getione%20Obbiettivi.mp4" type="video/mp4">
+        <video muted loop playsinline preload="metadata" poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9' preserveAspectRatio='none'><rect width='16' height='9' fill='%23080b14'/></svg>">
+          <source src="Video_Cropped/Getione%20Obbiettivi.mp4#t=0.5" type="video/mp4">
         </video>
         <div class="gallery-tile-overlay"></div>
         <div class="gallery-tile-label">
@@ -2199,8 +2199,8 @@ img, video, svg{max-width:100%;}
       </div>
 
       <div class="gallery-tile" data-title="Auto-BE e Rischio" data-src="Video_Cropped/Autobe%20e%20Rischio.mp4" tabindex="0">
-        <video muted loop playsinline preload="metadata">
-          <source src="Video_Cropped/Autobe%20e%20Rischio.mp4" type="video/mp4">
+        <video muted loop playsinline preload="metadata" poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9' preserveAspectRatio='none'><rect width='16' height='9' fill='%23080b14'/></svg>">
+          <source src="Video_Cropped/Autobe%20e%20Rischio.mp4#t=0.5" type="video/mp4">
         </video>
         <div class="gallery-tile-overlay"></div>
         <div class="gallery-tile-label">
@@ -2213,8 +2213,8 @@ img, video, svg{max-width:100%;}
       </div>
 
       <div class="gallery-tile" data-title="Tutto Sotto Controllo" data-src="Video_Cropped/Options%20Tenere%20sotto%20controllo%20tutto.mp4" tabindex="0">
-        <video muted loop playsinline preload="metadata">
-          <source src="Video_Cropped/Options%20Tenere%20sotto%20controllo%20tutto.mp4" type="video/mp4">
+        <video muted loop playsinline preload="metadata" poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9' preserveAspectRatio='none'><rect width='16' height='9' fill='%23080b14'/></svg>">
+          <source src="Video_Cropped/Options%20Tenere%20sotto%20controllo%20tutto.mp4#t=0.5" type="video/mp4">
         </video>
         <div class="gallery-tile-overlay"></div>
         <div class="gallery-tile-label">
@@ -2227,8 +2227,8 @@ img, video, svg{max-width:100%;}
       </div>
 
       <div class="gallery-tile" data-title="Analisi Statistiche" data-src="Video_Cropped/Statistiche%20sono%20Oro.mp4" tabindex="0">
-        <video muted loop playsinline preload="metadata">
-          <source src="Video_Cropped/Statistiche%20sono%20Oro.mp4" type="video/mp4">
+        <video muted loop playsinline preload="metadata" poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9' preserveAspectRatio='none'><rect width='16' height='9' fill='%23080b14'/></svg>">
+          <source src="Video_Cropped/Statistiche%20sono%20Oro.mp4#t=0.5" type="video/mp4">
         </video>
         <div class="gallery-tile-overlay"></div>
         <div class="gallery-tile-label">
@@ -2252,7 +2252,8 @@ img, video, svg{max-width:100%;}
   align-items:center;justify-content:center;
   backdrop-filter:blur(6px);" role="dialog" aria-modal="true" aria-label="Video">
   <div style="position:relative;width:min(90vw,1280px);max-height:90vh;">
-    <video id="lightboxVideo" controls playsinline
+    <video id="lightboxVideo" controls playsinline preload="auto"
+           poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9' preserveAspectRatio='none'><rect width='16' height='9' fill='%23000000'/></svg>"
            style="width:100%;max-height:90vh;border-radius:10px;background:#000;display:block;"></video>
     <button id="lightboxClose" aria-label="Chiudi video"
       style="position:absolute;top:-44px;right:0;background:none;border:none;
@@ -2817,10 +2818,14 @@ window.addEventListener('scroll', () => {
     lb.style.display = 'flex';
     document.body.style.overflow = 'hidden';
 
-    // Imposta src PRIMA di qualsiasi altra cosa
+    // FIX MOBILE: rimuovi <source> figli (se presenti) e imposta src direttamente.
+    // Su Android Chrome `lbVideo.src = ...` da solo non sempre triggera reload:
+    // dobbiamo chiamare load() ESPLICITAMENTE prima di play().
+    while (lbVideo.firstChild) lbVideo.removeChild(lbVideo.firstChild);
     lbVideo.src = src;
-    lbVideo.muted = true;        // start muted (aggira restrizioni mobile)
-    lbVideo.currentTime = 0;
+    lbVideo.muted = true;        // start muted (aggira restrizioni autoplay mobile)
+    lbVideo.load();              // forza il reload del nuovo src su mobile
+    try { lbVideo.currentTime = 0; } catch(e){}
 
     // *** play() chiamato SUBITO, dentro il gestore click (user-gesture context) ***
     // Su mobile il browser richiede che play() parta sincronicamente col gesto.
@@ -2856,22 +2861,54 @@ window.addEventListener('scroll', () => {
     var v   = tile.querySelector('video');
     var src = tile.dataset.src;
     var ttl = tile.dataset.title;
+    var primed = false;   // evita di fare il "priming" più di una volta
 
-    // Primo frame come thumbnail: seek a 0.1s dopo loadedmetadata
+    // Primo frame come thumbnail: seek a 0.5s dopo loadedmetadata
+    // (il `#t=0.5` nell'URL già forza il browser a posizionarsi lì,
+    // questo seek esplicito è un fallback per browser che non onorano il fragment)
     v.addEventListener('loadedmetadata', function(){
-      try { v.currentTime = 0.1; } catch(e){}
+      try { v.currentTime = 0.5; } catch(e){}
     });
     v.addEventListener('seeked', function(){
       // Su touch fermiamo subito: la tile mostra il fermo immagine
       if(isTouchDevice) v.pause();
     });
 
+    // FIX MOBILE: Android Chrome/iOS Safari NON dipingono il frame
+    // dopo un semplice currentTime seek. Soluzione: autoplay+pause
+    // fa "primare" il canvas. Essendo muted+playsinline è permesso.
+    if(isTouchDevice){
+      var primeFrame = function(){
+        if(primed) return;
+        primed = true;
+        var pp = v.play();
+        if(pp && typeof pp.then === 'function'){
+          pp.then(function(){
+            // pausa dopo ~80ms: tempo sufficiente a dipingere il frame
+            setTimeout(function(){ v.pause(); }, 80);
+          }).catch(function(){ /* policy autoplay rifiutata: amen, c'è il poster */ });
+        }
+      };
+      // Tenta il priming sia subito sia all'apparizione in viewport
+      if(v.readyState >= 1) primeFrame();
+      else v.addEventListener('loadedmetadata', primeFrame, { once:true });
+      // Intersection Observer: prima volta che la tile entra in viewport
+      if('IntersectionObserver' in window){
+        var io = new IntersectionObserver(function(entries){
+          entries.forEach(function(e){
+            if(e.isIntersecting){ primeFrame(); io.unobserve(e.target); }
+          });
+        }, { rootMargin:'100px' });
+        io.observe(tile);
+      }
+    }
+
     if(!isTouchDevice){
       // Desktop: hover → play preview nella tile
       tile.addEventListener('mouseenter', function(){ v.play().catch(function(){}); });
       tile.addEventListener('mouseleave', function(){
         v.pause();
-        try { v.currentTime = 0.1; } catch(e){}
+        try { v.currentTime = 0.5; } catch(e){}
       });
     }
 
