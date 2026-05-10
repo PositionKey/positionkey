@@ -2816,16 +2816,25 @@ window.addEventListener('scroll', () => {
     lbTitle.textContent = title || '';
     lb.style.display = 'flex';
     document.body.style.overflow = 'hidden';
-    // Imposta src e avvia
-    lbVideo.src = src;   // già URL-encoded nell'attributo data-src
+
+    // Imposta src PRIMA di qualsiasi altra cosa
+    lbVideo.src = src;
+    lbVideo.muted = true;        // start muted (aggira restrizioni mobile)
     lbVideo.currentTime = 0;
-    lbVideo.muted = false;
-    // play() dopo che il browser ha caricato abbastanza dati
-    lbVideo.addEventListener('canplay', function onCan(){
-      lbVideo.removeEventListener('canplay', onCan);
-      lbVideo.play().catch(()=>{ lbVideo.muted = true; lbVideo.play().catch(()=>{}); });
-    });
-    lbVideo.load();
+
+    // *** play() chiamato SUBITO, dentro il gestore click (user-gesture context) ***
+    // Su mobile il browser richiede che play() parta sincronicamente col gesto.
+    var p = lbVideo.play();
+    if(p !== undefined){
+      p.then(function(){
+        // Dopo che il play è partito, proviamo ad attivare l'audio
+        lbVideo.muted = false;
+      }).catch(function(){
+        // Se play() fallisce anche muted, mostriamo comunque il video
+        lbVideo.muted = true;
+        lbVideo.play().catch(function(){});
+      });
+    }
   }
 
   function closeLightbox(){
@@ -2837,37 +2846,42 @@ window.addEventListener('scroll', () => {
   }
 
   lbClose.addEventListener('click', closeLightbox);
-  lb.addEventListener('click', e => { if(e.target === lb) closeLightbox(); });
-  document.addEventListener('keydown', e => {
+  lb.addEventListener('click', function(e){ if(e.target === lb) closeLightbox(); });
+  document.addEventListener('keydown', function(e){
     if(e.key === 'Escape' && lb.style.display === 'flex') closeLightbox();
   });
 
-  /* ── Tile: thumbnail + hover/touch ── */
-  document.querySelectorAll('.gallery-tile').forEach(tile => {
-    const v   = tile.querySelector('video');
-    const src = tile.dataset.src;
-    const ttl = tile.dataset.title;
+  /* ── Tile: thumbnail (primo frame) + hover/touch ── */
+  document.querySelectorAll('.gallery-tile').forEach(function(tile){
+    var v   = tile.querySelector('video');
+    var src = tile.dataset.src;
+    var ttl = tile.dataset.title;
 
-    // Forza il primo frame come thumbnail dopo il caricamento dei metadata
-    v.addEventListener('loadedmetadata', () => {
-      v.currentTime = 0.1;
+    // Primo frame come thumbnail: seek a 0.1s dopo loadedmetadata
+    v.addEventListener('loadedmetadata', function(){
+      try { v.currentTime = 0.1; } catch(e){}
     });
-    // Quando seekato, metti in pausa (vogliamo solo il fermo immagine)
-    v.addEventListener('seeked', () => {
-      if(!isTouchDevice) return; // su desktop la pausa è gestita da mouseleave
-      v.pause();
+    v.addEventListener('seeked', function(){
+      // Su touch fermiamo subito: la tile mostra il fermo immagine
+      if(isTouchDevice) v.pause();
     });
 
     if(!isTouchDevice){
-      // Desktop: hover → play preview
-      tile.addEventListener('mouseenter', () => { v.play().catch(()=>{}); });
-      tile.addEventListener('mouseleave', () => { v.pause(); v.currentTime = 0.1; });
+      // Desktop: hover → play preview nella tile
+      tile.addEventListener('mouseenter', function(){ v.play().catch(function(){}); });
+      tile.addEventListener('mouseleave', function(){
+        v.pause();
+        try { v.currentTime = 0.1; } catch(e){}
+      });
     }
 
-    // Click / Tap → lightbox
-    tile.addEventListener('click', () => openLightbox(src, ttl));
-    tile.addEventListener('keydown', e => {
-      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openLightbox(src, ttl); }
+    // Click / Tap → apre lightbox
+    tile.addEventListener('click', function(){ openLightbox(src, ttl); });
+    tile.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        openLightbox(src, ttl);
+      }
     });
   });
 })();
