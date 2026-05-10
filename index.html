@@ -1536,34 +1536,72 @@ img, video, svg{max-width:100%;}
   .section-title{font-size:34px;line-height:1.05;}
   .section-sub{font-size:15.5px;}
 
-  /* HERO mobile */
-  .hero-inner{
-    padding:90px 18px 60px;
-    gap:32px;
+  /* ── HERO MOBILE ── */
+
+  /* 1. Sezione hero: flusso normale, niente altezza fissa */
+  section.hero.full{
+    min-height:auto;
+    display:flex;flex-direction:column;
+    padding:0 !important;
   }
-  .hero-eyebrow{font-size:10px;letter-spacing:1.8px;}
-  .hero-title{font-size:42px !important;letter-spacing:.5px;}
-  .hero-quote{font-size:17px;line-height:1.5;}
+
+  /* 2. Hero-inner: colonna centrata, padding compatto */
+  .hero-inner,
+  .hero-inner.hero-inner--centered{
+    padding:88px 20px 36px;
+    gap:24px;
+    text-align:center;
+  }
+
+  /* 3. Titolo: rimuovi il <br> forzato, dimensione leggibile */
+  .hero-title br{display:none;}
+  .hero-title{
+    font-size:clamp(36px,10vw,52px) !important;
+    letter-spacing:.5px;
+    line-height:1;
+  }
+
+  /* 4. Eyebrow */
+  .hero-eyebrow{font-size:10px;letter-spacing:1.8px;margin-bottom:18px;}
+
+  /* 5. Quote: più compatta */
+  .hero-quote{font-size:16px;line-height:1.5;margin-top:14px;max-width:100%;}
+
+  /* 6. CTA buttons: full-width */
+  .hero-cta-group{flex-direction:column;gap:10px;margin-top:24px;}
   .hero-cta-group .btn-primary,
   .hero-cta-group .btn-outline{
     width:100%;justify-content:center;
     padding:15px 18px;font-size:11px;letter-spacing:1.6px;
   }
-  /* Hero stats: 2x2 e font scalato */
-  .hero-stats{flex-wrap:wrap;position:relative;}
-  .hero-stat{flex:1 1 50%;padding:14px 16px;}
-  .hero-stat .val{font-size:26px;}
-  .hero-stat .lbl{font-size:9.5px;letter-spacing:1.4px;}
+
+  /* 7. Hero showcase: full width, nessuna candela */
+  .hero-showcase{width:100%;max-width:100%;margin:0 auto;padding-top:0;}
+  .candle-3d{display:none !important;}
+
+  /* 8. Hero-stats: STATIC (non più absolute), griglia 2×2 */
+  .hero-stats{
+    position:static !important;
+    flex-wrap:wrap;
+    background:rgba(10,12,24,.85);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border-top:1px solid var(--border);
+    width:100%;
+  }
+  .hero-stat{flex:1 1 50%;padding:18px 14px;}
+  .hero-stat .val{font-size:28px;}
+  .hero-stat .lbl{font-size:9px;letter-spacing:1.5px;}
   .hero-stat:nth-child(odd){border-right:1px solid var(--border);}
   .hero-stat:nth-child(even){border-right:none;}
   .hero-stat:nth-child(1),
   .hero-stat:nth-child(2){border-bottom:1px solid var(--border);}
 
-  /* Pannello video: aspect-ratio si adatta, no overflow */
+  /* 9. Pannello video: adatta al viewport */
   .pk-video-frame{border-radius:10px;}
   .pk-caption{
-    font-size:9.5px;letter-spacing:1.5px;
-    left:0;right:0;bottom:-36px;
+    font-size:9px;letter-spacing:1.4px;
+    left:0;right:0;bottom:-34px;
     padding:0 6px;line-height:1.4;
   }
   .pk-progress{left:0;right:0;bottom:-10px;}
@@ -1617,14 +1655,16 @@ img, video, svg{max-width:100%;}
 
 /* SMALL MOBILE — 380px e sotto */
 @media(max-width:380px){
-  .hero-title{font-size:36px !important;}
+  .hero-title{font-size:32px !important;}
+  .hero-inner,
+  .hero-inner.hero-inner--centered{padding:80px 14px 30px;}
+  .hero-stat .val{font-size:24px;}
   .section-title{font-size:30px;}
   .nav-logo-text{font-size:16px;}
   .vantaggi-intro-title{font-size:30px;}
   .pricing-price .amt{font-size:42px;}
   .cta-title{font-size:34px;}
   section{padding:56px 14px;}
-  .hero-inner{padding:80px 14px 50px;}
 }
 </style>
 </head>
@@ -2115,8 +2155,8 @@ img, video, svg{max-width:100%;}
     <p class="section-sub reveal">Cinque registrazioni reali del software in azione. Nessuna animazione finta, nessun mockup ricostruito a posteriori.</p>
 
     <div class="gallery-grid reveal">
-      <div class="gallery-tile" data-title="Operatività e Rischio Controllato" tabindex="0">
-        <video muted loop playsinline preload="none">
+      <div class="gallery-tile" data-title="Operatività e Rischio Controllato" data-src="Video_Cropped/Operatività e Rischio controllato.mp4" tabindex="0">
+        <video muted loop playsinline preload="metadata">
           <source src="Video_Cropped/Operatività e Rischio controllato.mp4" type="video/mp4">
         </video>
         <div class="gallery-tile-overlay"></div>
@@ -2124,13 +2164,13 @@ img, video, svg{max-width:100%;}
           <span class="gallery-tile-num">01 · Esecuzione</span>
           <span class="gallery-tile-title">Operatività e Rischio Controllato</span>
         </div>
-        <button class="gallery-tile-expand" aria-label="Apri a schermo intero" tabindex="-1">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/></svg>
+        <button class="gallery-tile-expand" aria-label="Guarda il video" tabindex="-1">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
         </button>
       </div>
 
-      <div class="gallery-tile" data-title="Gestione Obiettivi" tabindex="0">
-        <video muted loop playsinline preload="none">
+      <div class="gallery-tile" data-title="Gestione Obiettivi" data-src="Video_Cropped/Getione Obbiettivi.mp4" tabindex="0">
+        <video muted loop playsinline preload="metadata">
           <source src="Video_Cropped/Getione Obbiettivi.mp4" type="video/mp4">
         </video>
         <div class="gallery-tile-overlay"></div>
@@ -2138,13 +2178,13 @@ img, video, svg{max-width:100%;}
           <span class="gallery-tile-num">02 · Obiettivi</span>
           <span class="gallery-tile-title">Gestione Obiettivi</span>
         </div>
-        <button class="gallery-tile-expand" aria-label="Apri a schermo intero" tabindex="-1">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/></svg>
+        <button class="gallery-tile-expand" aria-label="Guarda il video" tabindex="-1">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
         </button>
       </div>
 
-      <div class="gallery-tile" data-title="Auto-BE e Rischio" tabindex="0">
-        <video muted loop playsinline preload="none">
+      <div class="gallery-tile" data-title="Auto-BE e Rischio" data-src="Video_Cropped/Autobe e Rischio.mp4" tabindex="0">
+        <video muted loop playsinline preload="metadata">
           <source src="Video_Cropped/Autobe e Rischio.mp4" type="video/mp4">
         </video>
         <div class="gallery-tile-overlay"></div>
@@ -2152,13 +2192,13 @@ img, video, svg{max-width:100%;}
           <span class="gallery-tile-num">03 · Protezione</span>
           <span class="gallery-tile-title">Auto-BE e Rischio</span>
         </div>
-        <button class="gallery-tile-expand" aria-label="Apri a schermo intero" tabindex="-1">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/></svg>
+        <button class="gallery-tile-expand" aria-label="Guarda il video" tabindex="-1">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
         </button>
       </div>
 
-      <div class="gallery-tile" data-title="Tutto Sotto Controllo" tabindex="0">
-        <video muted loop playsinline preload="none">
+      <div class="gallery-tile" data-title="Tutto Sotto Controllo" data-src="Video_Cropped/Options Tenere sotto controllo tutto.mp4" tabindex="0">
+        <video muted loop playsinline preload="metadata">
           <source src="Video_Cropped/Options Tenere sotto controllo tutto.mp4" type="video/mp4">
         </video>
         <div class="gallery-tile-overlay"></div>
@@ -2166,13 +2206,13 @@ img, video, svg{max-width:100%;}
           <span class="gallery-tile-num">04 · Controllo</span>
           <span class="gallery-tile-title">Tutto Sotto Controllo</span>
         </div>
-        <button class="gallery-tile-expand" aria-label="Apri a schermo intero" tabindex="-1">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/></svg>
+        <button class="gallery-tile-expand" aria-label="Guarda il video" tabindex="-1">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
         </button>
       </div>
 
-      <div class="gallery-tile" data-title="Statistiche Sono Oro" tabindex="0">
-        <video muted loop playsinline preload="none">
+      <div class="gallery-tile" data-title="Statistiche Sono Oro" data-src="Video_Cropped/Statistiche sono Oro.mp4" tabindex="0">
+        <video muted loop playsinline preload="metadata">
           <source src="Video_Cropped/Statistiche sono Oro.mp4" type="video/mp4">
         </video>
         <div class="gallery-tile-overlay"></div>
@@ -2180,13 +2220,38 @@ img, video, svg{max-width:100%;}
           <span class="gallery-tile-num">05 · Analisi</span>
           <span class="gallery-tile-title">Statistiche Sono Oro</span>
         </div>
-        <button class="gallery-tile-expand" aria-label="Apri a schermo intero" tabindex="-1">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/></svg>
+        <button class="gallery-tile-expand" aria-label="Guarda il video" tabindex="-1">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
         </button>
       </div>
     </div>
   </div>
 </section>
+
+<!-- ============================================================
+     VIDEO LIGHTBOX MODAL
+     ============================================================ -->
+<div id="videoLightbox" style="
+  display:none;position:fixed;inset:0;z-index:9000;
+  background:rgba(0,0,0,0.92);
+  align-items:center;justify-content:center;
+  backdrop-filter:blur(6px);" role="dialog" aria-modal="true" aria-label="Video">
+  <div style="position:relative;width:min(90vw,1280px);max-height:90vh;">
+    <video id="lightboxVideo" controls playsinline
+           style="width:100%;max-height:90vh;border-radius:10px;background:#000;display:block;"></video>
+    <button id="lightboxClose" aria-label="Chiudi video"
+      style="position:absolute;top:-44px;right:0;background:none;border:none;
+             color:#fff;cursor:pointer;opacity:.8;padding:8px;"
+      onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='.8'">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+           stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <div id="lightboxTitle"
+      style="position:absolute;bottom:-36px;left:0;
+             font-family:var(--mono);font-size:11px;letter-spacing:2px;
+             text-transform:uppercase;color:rgba(255,255,255,0.45);"></div>
+  </div>
+</div>
 
 <!-- ===========================================================
      S5b — VANTAGGI (NEW — sezione centrale stile MagicKeys "Informazioni")
@@ -2722,56 +2787,55 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 // ============================================================
-// Gallery — hover-play + click → fullscreen (con audio attivato)
+// Gallery — hover-play preview + click → lightbox modal
 // ============================================================
-function openVideoFullscreen(video){
-  if(!video) return;
-  // Pausa, attiva audio e parte da capo
-  video.pause();
-  video.currentTime = 0;
-  video.muted = false;
-  video.controls = true;
-  // Cross-browser fullscreen
-  const req = video.requestFullscreen
-            || video.webkitRequestFullscreen
-            || video.webkitEnterFullscreen   /* iOS Safari */
-            || video.msRequestFullscreen;
-  if(req){
-    Promise.resolve(req.call(video)).then(()=>video.play().catch(()=>{}))
-      .catch(()=>{ /* fallback: play inline con audio */ video.play().catch(()=>{}); });
-  } else {
-    video.play().catch(()=>{});
-  }
-}
-// Quando esce dal fullscreen → ripristina mute/loop
-document.addEventListener('fullscreenchange', () => {
-  if(!document.fullscreenElement){
-    document.querySelectorAll('.gallery-tile video').forEach(v => {
-      v.muted = true; v.controls = false; v.currentTime = 0; v.pause();
-    });
-  }
-});
+(function galleryInit(){
+  const lb       = document.getElementById('videoLightbox');
+  const lbVideo  = document.getElementById('lightboxVideo');
+  const lbClose  = document.getElementById('lightboxClose');
+  const lbTitle  = document.getElementById('lightboxTitle');
 
-document.querySelectorAll('.gallery-tile').forEach(tile => {
-  const v = tile.querySelector('video');
-  // Hover preview
-  tile.addEventListener('mouseenter', () => { v.play().catch(()=>{}); });
-  tile.addEventListener('mouseleave', () => {
-    if(!document.fullscreenElement){ v.pause(); v.currentTime = 0; }
+  function openLightbox(src, title){
+    lbVideo.src = src;
+    lbTitle.textContent = title || '';
+    lb.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    lbVideo.currentTime = 0;
+    lbVideo.play().catch(()=>{});
+  }
+
+  function closeLightbox(){
+    lbVideo.pause();
+    lbVideo.src = '';
+    lb.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  // Chiudi con pulsante X
+  lbClose.addEventListener('click', closeLightbox);
+  // Chiudi cliccando fuori dal video
+  lb.addEventListener('click', (e) => { if(e.target === lb) closeLightbox(); });
+  // Chiudi con Escape
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape' && lb.style.display === 'flex') closeLightbox();
   });
-  // Click ovunque sulla tile o sul tasto expand → fullscreen
-  tile.addEventListener('click', (e) => {
-    e.preventDefault();
-    openVideoFullscreen(v);
+
+  document.querySelectorAll('.gallery-tile').forEach(tile => {
+    const v   = tile.querySelector('video');
+    const src = tile.dataset.src;
+    const ttl = tile.dataset.title;
+
+    // Hover → anteprima muted nella tile
+    tile.addEventListener('mouseenter', () => { v.play().catch(()=>{}); });
+    tile.addEventListener('mouseleave', () => { v.pause(); v.currentTime = 0; });
+
+    // Click → apre lightbox con audio e controlli
+    tile.addEventListener('click', () => openLightbox(src, ttl));
+    tile.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openLightbox(src, ttl); }
+    });
   });
-  // Tastiera (Enter / Space) per accessibilità
-  tile.addEventListener('keydown', (e) => {
-    if(e.key === 'Enter' || e.key === ' '){
-      e.preventDefault();
-      openVideoFullscreen(v);
-    }
-  });
-});
+})();
 
 // ============================================================
 // FAQ toggle
